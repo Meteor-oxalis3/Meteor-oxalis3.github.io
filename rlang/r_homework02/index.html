@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>R_homework02 // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="R_homework02" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/rlang/r_homework02/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.120.1">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                
+                <a class="main-nav-link" href="/rlang/">Rlang</a>
+                
+                <a class="main-nav-link" href="/clang/">Clang</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">R_homework02</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/rlang/r_homework02/" class="article-date">
+                <time datetime='2023-12-04T03:08:25.000&#43;08:00' itemprop="datePublished">2023-12-04</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="codes">Codes</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(readr)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(dplyr)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 读取数据文件</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> <span style="color:#a6e22e">read_csv</span>(<span style="color:#e6db74">&#34;dat1.csv&#34;</span>, show_col_types <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 分组: BMI&amp;Age的均值&amp;标准差</span>
+</span></span><span style="display:flex;"><span>mean_bmi <span style="color:#f92672">=</span> <span style="color:#a6e22e">mean</span>(data<span style="color:#f92672">$</span>BMI, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>std_bmi <span style="color:#f92672">=</span> <span style="color:#a6e22e">sd</span>(data<span style="color:#f92672">$</span>BMI, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>mean_age <span style="color:#f92672">=</span> <span style="color:#a6e22e">mean</span>(data<span style="color:#f92672">$</span>Age, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>std_age <span style="color:#f92672">=</span> <span style="color:#a6e22e">sd</span>(data<span style="color:#f92672">$</span>Age, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 总人群: BMI&amp;Age的均值&amp;标准差</span>
+</span></span><span style="display:flex;"><span>All_age_range <span style="color:#f92672">=</span> <span style="color:#a6e22e">paste</span>(<span style="color:#a6e22e">round</span>(mean_age <span style="color:#f92672">-</span> std_age, <span style="color:#ae81ff">2</span>), <span style="color:#e6db74">&#34;~&#34;</span>, <span style="color:#a6e22e">round</span>(mean_age <span style="color:#f92672">+</span> std_age, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>All_BMI_range <span style="color:#f92672">=</span> <span style="color:#a6e22e">paste</span>(<span style="color:#a6e22e">round</span>(mean_bmi <span style="color:#f92672">-</span> std_bmi, <span style="color:#ae81ff">2</span>), <span style="color:#e6db74">&#34;~&#34;</span>, <span style="color:#a6e22e">round</span>(mean_bmi <span style="color:#f92672">+</span> std_bmi, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 分组: 数据汇总</span>
+</span></span><span style="display:flex;"><span>grouped_stats <span style="color:#f92672">=</span> data <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">group_by</span>(Race) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">summarise</span>(
+</span></span><span style="display:flex;"><span>    Age <span style="color:#f92672">=</span> <span style="color:#a6e22e">paste</span>(<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">mean</span>(Age, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#f92672">-</span> <span style="color:#a6e22e">sd</span>(Age, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;~&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">mean</span>(Age, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">sd</span>(Age, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>)),
+</span></span><span style="display:flex;"><span>    BMI <span style="color:#f92672">=</span> <span style="color:#a6e22e">paste</span>(<span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">mean</span>(BMI, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#f92672">-</span> <span style="color:#a6e22e">sd</span>(BMI, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;~&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">mean</span>(BMI, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">sd</span>(BMI, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>)),
+</span></span><span style="display:flex;"><span>    .groups <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;drop&#39;</span>
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 总人群: 数据汇总</span>
+</span></span><span style="display:flex;"><span>all_stats <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(
+</span></span><span style="display:flex;"><span>  Race <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;All&#34;</span>,
+</span></span><span style="display:flex;"><span>  Age <span style="color:#f92672">=</span> All_age_range,
+</span></span><span style="display:flex;"><span>  BMI <span style="color:#f92672">=</span> All_BMI_range
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 数据连接</span>
+</span></span><span style="display:flex;"><span>combined_stats <span style="color:#f92672">=</span> <span style="color:#a6e22e">rbind</span>(grouped_stats, all_stats)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 打印结果</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">print</span>(combined_stats, row.names <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n#########################################################\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">###################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 正态分布法: BMI和Age 95%参考值范围</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># BMI单侧</span>
+</span></span><span style="display:flex;"><span>lower_bmi <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">qnorm</span>(<span style="color:#ae81ff">0.05</span>, mean_bmi, std_bmi), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>upper_bmi <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">qnorm</span>(<span style="color:#ae81ff">0.95</span>, mean_bmi, std_bmi), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># BMI双侧</span>
+</span></span><span style="display:flex;"><span>left_bmi <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">qnorm</span>(<span style="color:#ae81ff">0.025</span>, mean_bmi, std_bmi), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>right_bmi <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">qnorm</span>(<span style="color:#ae81ff">0.975</span>, mean_bmi, std_bmi), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Age单侧</span>
+</span></span><span style="display:flex;"><span>lower_age <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">qnorm</span>(<span style="color:#ae81ff">0.05</span>, mean_age, std_age), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>upper_age <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">qnorm</span>(<span style="color:#ae81ff">0.95</span>, mean_age, std_age), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Age双侧</span>
+</span></span><span style="display:flex;"><span>left_age <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">qnorm</span>(<span style="color:#ae81ff">0.025</span>, mean_age, std_age), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>right_age <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">qnorm</span>(<span style="color:#ae81ff">0.975</span>, mean_age, std_age), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;正态分布法(单侧), BMI的95%参考值范围, 只有下限为:&#34;</span>, lower_bmi, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;正态分布法(单侧), BMI的95%参考值范围, 只有上限为:&#34;</span>, upper_bmi, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;正态分布法(双侧), BMI的95%参考值范围为:&#34;</span>, left_bmi, <span style="color:#e6db74">&#34;~&#34;</span>, right_bmi, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;正态分布法(单侧), Age的95%参考值范围, 只有下限为:&#34;</span>, lower_age, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;正态分布法(单侧), Age的95%参考值范围, 只有上限为:&#34;</span>, upper_age, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;正态分布法(双侧), Age的95%参考值范围为:&#34;</span>, left_age, <span style="color:#e6db74">&#34;~&#34;</span>, right_age, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n#########################################################\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">###################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 百分位数法: BMI和Age 95%参考值范围</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># BMI单侧</span>
+</span></span><span style="display:flex;"><span>lower_percent_bmi <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">quantile</span>(data<span style="color:#f92672">$</span>BMI, probs <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>upper_percent_bmi <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">quantile</span>(data<span style="color:#f92672">$</span>BMI, probs <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.95</span>, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># BMI双侧</span>
+</span></span><span style="display:flex;"><span>left_percent_bmi <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">quantile</span>(data<span style="color:#f92672">$</span>BMI, <span style="color:#ae81ff">0.025</span>, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>right_percent_bmi <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">quantile</span>(data<span style="color:#f92672">$</span>BMI, <span style="color:#ae81ff">0.975</span>, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Age单侧</span>
+</span></span><span style="display:flex;"><span>lower_percent_age <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">quantile</span>(data<span style="color:#f92672">$</span>Age, probs <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>upper_percent_age <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">quantile</span>(data<span style="color:#f92672">$</span>Age, probs <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.95</span>, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Age双侧</span>
+</span></span><span style="display:flex;"><span>left_percent_age <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">quantile</span>(data<span style="color:#f92672">$</span>Age, <span style="color:#ae81ff">0.025</span>, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>right_percent_age <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">quantile</span>(data<span style="color:#f92672">$</span>Age, <span style="color:#ae81ff">0.975</span>, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;百分位数法(单侧), BMI的95%参考值范围, 只有下限为:&#34;</span>, lower_percent_bmi, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;百分位数法(单侧), BMI的95%参考值范围, 只有上限为:&#34;</span>, upper_percent_bmi, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;百分位数法(双侧), BMI的95%参考值范围为:&#34;</span>, left_percent_bmi, <span style="color:#e6db74">&#34;~&#34;</span>, right_percent_bmi, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;百分位数法(单侧), Age的95%参考值范围, 只有下限为:&#34;</span>, lower_percent_age, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;百分位数法(单侧), Age的95%参考值范围, 只有上限为:&#34;</span>, upper_percent_age, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;百分位数法(双侧), Age的95%参考值范围为:&#34;</span>, left_percent_age, <span style="color:#e6db74">&#34;~&#34;</span>, right_percent_age, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n#########################################################\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">###################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># BMI在24-28kg/m²的概率</span>
+</span></span><span style="display:flex;"><span>bmi_24_28 <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">pnorm</span>(<span style="color:#ae81ff">28</span>, mean_bmi, std_bmi) <span style="color:#f92672">-</span> <span style="color:#a6e22e">pnorm</span>(<span style="color:#ae81ff">24</span>, mean_bmi, std_bmi), <span style="color:#ae81ff">4</span>) 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 保留4位小数提高精度</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 打印结果</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;BMI在24-28kg/m²的概率为:&#34;</span>, bmi_24_28, <span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span></code></pre></div><h2 id="results">Results</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A tibble: 6 × 3</span>
+</span></span><span style="display:flex;"><span>  Race  Age           BMI          
+</span></span><span style="display:flex;"><span>  &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;        
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span>     56.98 ~ 73.05 23.49 ~ 33.27
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> <span style="color:#ae81ff">2</span>     53.54 ~ 76.14 22.25 ~ 33.7 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">3</span>     56.86 ~ 78.52 22.55 ~ 33.87
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span> <span style="color:#ae81ff">4</span>     55.77 ~ 75.01 23.35 ~ 36.57
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span> <span style="color:#ae81ff">5</span>     53.13 ~ 70.58 21.92 ~ 32.94
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span> All   56.31 ~ 76.72 22.79 ~ 34.22
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#########################################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>正态分布法<span style="color:#f92672">(</span>单侧<span style="color:#f92672">)</span>, BMI的95%参考值范围, 只有下限为: 19.1 
+</span></span><span style="display:flex;"><span>正态分布法<span style="color:#f92672">(</span>单侧<span style="color:#f92672">)</span>, BMI的95%参考值范围, 只有上限为: 37.91 
+</span></span><span style="display:flex;"><span>正态分布法<span style="color:#f92672">(</span>双侧<span style="color:#f92672">)</span>, BMI的95%参考值范围为: 17.3 ~ 39.71 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>正态分布法<span style="color:#f92672">(</span>单侧<span style="color:#f92672">)</span>, Age的95%参考值范围, 只有下限为: 49.73 
+</span></span><span style="display:flex;"><span>正态分布法<span style="color:#f92672">(</span>单侧<span style="color:#f92672">)</span>, Age的95%参考值范围, 只有上限为: 83.31 
+</span></span><span style="display:flex;"><span>正态分布法<span style="color:#f92672">(</span>双侧<span style="color:#f92672">)</span>, Age的95%参考值范围为: 46.52 ~ 86.52 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#########################################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>百分位数法<span style="color:#f92672">(</span>单侧<span style="color:#f92672">)</span>, BMI的95%参考值范围, 只有下限为: 20.34 
+</span></span><span style="display:flex;"><span>百分位数法<span style="color:#f92672">(</span>单侧<span style="color:#f92672">)</span>, BMI的95%参考值范围, 只有上限为: 39.43 
+</span></span><span style="display:flex;"><span>百分位数法<span style="color:#f92672">(</span>双侧<span style="color:#f92672">)</span>, BMI的95%参考值范围为: 19.3 ~ 42.41 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>百分位数法<span style="color:#f92672">(</span>单侧<span style="color:#f92672">)</span>, Age的95%参考值范围, 只有下限为: <span style="color:#ae81ff">51</span> 
+</span></span><span style="display:flex;"><span>百分位数法<span style="color:#f92672">(</span>单侧<span style="color:#f92672">)</span>, Age的95%参考值范围, 只有上限为: <span style="color:#ae81ff">85</span> 
+</span></span><span style="display:flex;"><span>百分位数法<span style="color:#f92672">(</span>双侧<span style="color:#f92672">)</span>, Age的95%参考值范围为: <span style="color:#ae81ff">50</span> ~ <span style="color:#ae81ff">85</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#########################################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BMI在24-28kg/m²的概率为: 0.2495 
+</span></span></code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#codes">Codes</a></li>
+    <li><a href="#results">Results</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="/mysql/gene-database/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            Gene Database
+        </div>
+    </a>
+    
+    
+    <a href="/rlang/r_homework01/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">R_homework01&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2023 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

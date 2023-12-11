@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>R_homework01 // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="R_homework01" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/rlang/r_homework01/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.120.1">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                
+                <a class="main-nav-link" href="/rlang/">Rlang</a>
+                
+                <a class="main-nav-link" href="/clang/">Clang</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">R_homework01</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/rlang/r_homework01/" class="article-date">
+                <time datetime='2023-11-26T11:38:06.000&#43;08:00' itemprop="datePublished">2023-11-26</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="codes">Codes</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Added means &amp; sds</span>
+</span></span><span style="display:flex;"><span>means <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">-2</span>)
+</span></span><span style="display:flex;"><span>sds <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">sqrt</span>(<span style="color:#ae81ff">0.2</span>), <span style="color:#ae81ff">1.0</span>, <span style="color:#a6e22e">sqrt</span>(<span style="color:#ae81ff">5.0</span>), <span style="color:#a6e22e">sqrt</span>(<span style="color:#ae81ff">0.5</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dnorm</span>(x, mean <span style="color:#f92672">=</span> means[1], sd <span style="color:#f92672">=</span> sds[1])
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plot</span>(x, y1, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, 
+</span></span><span style="display:flex;"><span>     main <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Normal Distributions&#34;</span>, ylim <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), yaxt <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;n&#34;</span>, xaxt <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;n&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Added axis</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">axis</span>(<span style="color:#ae81ff">2</span>, at <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, by <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.2</span>), las <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">axis</span>(<span style="color:#ae81ff">1</span>, at <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">-5</span>, <span style="color:#ae81ff">5</span>, by <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Added grid lines</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">abline</span>(h <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, by <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.2</span>), col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gray&#34;</span>, lty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dotted&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">abline</span>(v <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">-5</span>, <span style="color:#ae81ff">5</span>, by <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>), col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gray&#34;</span>, lty <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dotted&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dnorm</span>(x, mean <span style="color:#f92672">=</span> means[2], sd <span style="color:#f92672">=</span> sds[2])
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lines</span>(x, y2, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dnorm</span>(x, mean <span style="color:#f92672">=</span> means[3], sd <span style="color:#f92672">=</span> sds[3])
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lines</span>(x, y3, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>y4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dnorm</span>(x, mean <span style="color:#f92672">=</span> means[4], sd <span style="color:#f92672">=</span> sds[4])
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lines</span>(x, y4, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l&#34;</span>, col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;purple&#34;</span>, lwd <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Added explanations (right)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;topright&#34;</span>, legend <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">expression</span>(mu <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">~</span> sigma^2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0.2</span>),
+</span></span><span style="display:flex;"><span>                              <span style="color:#a6e22e">expression</span>(mu <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">~</span> sigma^2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">1.0</span>),
+</span></span><span style="display:flex;"><span>                              <span style="color:#a6e22e">expression</span>(mu <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">~</span> sigma^2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">5.0</span>),
+</span></span><span style="display:flex;"><span>                              <span style="color:#a6e22e">expression</span>(mu <span style="color:#f92672">==</span> <span style="color:#ae81ff">-2</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">~</span> sigma^2 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0.5</span>)),
+</span></span><span style="display:flex;"><span>       col <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;red&#34;</span>, <span style="color:#e6db74">&#34;green&#34;</span>, <span style="color:#e6db74">&#34;blue&#34;</span>, <span style="color:#e6db74">&#34;purple&#34;</span>), lty <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Added explanations (left)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;topleft&#34;</span>, legend <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">expression</span>(mu <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;mean&#34;</span>),
+</span></span><span style="display:flex;"><span>                             <span style="color:#a6e22e">expression</span>(sigma <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;standard deviation&#34;</span>),
+</span></span><span style="display:flex;"><span>                             <span style="color:#a6e22e">expression</span>(sigma^2 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;variance&#34;</span>)),
+</span></span><span style="display:flex;"><span>       cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>)
+</span></span></code></pre></div><hr>
+<h2 id="image">Image</h2>
+<p><img src="/images/R_homework_01.png" alt=""></p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#codes">Codes</a></li>
+    <li><a href="#image">Image</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="/rlang/r_homework02/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            R_homework02
+        </div>
+    </a>
+    
+    
+    <a href="/clang/mercari/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Mercari Fee Caculator&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2023 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>
