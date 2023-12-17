@@ -2,13 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://meteor-oxalis3.github.io/</loc>
+    <lastmod>2023-12-18T00:14:05+08:00</lastmod>
+  </url><url>
+    <loc>https://meteor-oxalis3.github.io/rlang/r_homework03/</loc>
+    <lastmod>2023-12-18T00:14:05+08:00</lastmod>
+  </url><url>
+    <loc>https://meteor-oxalis3.github.io/rlang/</loc>
+    <lastmod>2023-12-18T00:14:05+08:00</lastmod>
+  </url><url>
     <loc>https://meteor-oxalis3.github.io/stcp_of_frp/</loc>
     <lastmod>2023-12-11T23:03:23+08:00</lastmod>
   </url><url>
     <loc>https://meteor-oxalis3.github.io/article/</loc>
-    <lastmod>2023-12-08T12:50:44+08:00</lastmod>
-  </url><url>
-    <loc>https://meteor-oxalis3.github.io/</loc>
     <lastmod>2023-12-08T12:50:44+08:00</lastmod>
   </url><url>
     <loc>https://meteor-oxalis3.github.io/article/the_truth_in_the_mirror/</loc>
@@ -21,9 +27,6 @@
     <lastmod>2023-12-08T00:59:26+08:00</lastmod>
   </url><url>
     <loc>https://meteor-oxalis3.github.io/rlang/r_homework02/</loc>
-    <lastmod>2023-12-04T03:08:25+08:00</lastmod>
-  </url><url>
-    <loc>https://meteor-oxalis3.github.io/rlang/</loc>
     <lastmod>2023-12-04T03:08:25+08:00</lastmod>
   </url><url>
     <loc>https://meteor-oxalis3.github.io/rlang/r_homework01/</loc>
