@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>R_homework04 // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="R_homework04" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/r_homework04/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.121.1">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                
+                <a class="main-nav-link" href="/rlang/">Rlang</a>
+                
+                <a class="main-nav-link" href="/clang/">Clang</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">R_homework04</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/r_homework04/" class="article-date">
+                <time datetime='2023-12-25T21:42:09.000&#43;08:00' itemprop="datePublished">2023-12-25</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="questions">Questions</h2>
+<p>Here’s the fourth R homework.</p>
+<h2 id="codes">Codes</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> data <span style="color:#f92672">=</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;dat1.csv&#34;</span>) <span style="color:#75715e"># 读入数据</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(agricolae)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;###################################################################\n\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;1.1 试评价不同教育程度(Education)的BMI是否有差别？如果有,哪两组有差别？\n\n&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d_BMI <span style="color:#f92672">=</span> data<span style="color:#f92672">$</span>BMI <span style="color:#75715e"># 提取BMI</span>
+</span></span><span style="display:flex;"><span>d_Education <span style="color:#f92672">=</span> data<span style="color:#f92672">$</span>Education <span style="color:#75715e"># 提取edu</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d_BMI_edu <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(data<span style="color:#f92672">$</span>BMI, data<span style="color:#f92672">$</span>Education) <span style="color:#75715e"># 组合</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 单因素方差分析</span>
+</span></span><span style="display:flex;"><span>result1<span style="color:#f92672">=</span> <span style="color:#a6e22e">aov</span>(d_BMI<span style="color:#f92672">~</span>d_Education, data <span style="color:#f92672">=</span> d_BMI_edu)
+</span></span><span style="display:flex;"><span>result1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># SNK多重比较</span>
+</span></span><span style="display:flex;"><span>result_SNK <span style="color:#f92672">=</span> <span style="color:#a6e22e">SNK.test</span>(result1,<span style="color:#e6db74">&#34;d_Education&#34;</span>,group<span style="color:#f92672">=</span>F)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span>result_SNK<span style="color:#f92672">$</span>comparison
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n综上, 由SNK多重比较可见, 教育程度组中1-2, 1-3, 2-5, 3-5存在明显差异&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n\n###################################################################\n\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;1.2 男性和女性的教育程度构成是否相同？\n&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d_edu <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(edu <span style="color:#f92672">=</span> data<span style="color:#f92672">$</span>Education, sex <span style="color:#f92672">=</span> data<span style="color:#f92672">$</span>Gender) <span style="color:#75715e"># 组合</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 卡方检验</span>
+</span></span><span style="display:flex;"><span>result2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">chisq.test</span>(<span style="color:#a6e22e">table</span>(d_edu),correct<span style="color:#f92672">=</span>F)
+</span></span><span style="display:flex;"><span>result2<span style="color:#f92672">$</span>expected
+</span></span><span style="display:flex;"><span>result2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;综上, 男性和女性的教育程度构成存在显著差异(p = 0.002304,p &lt; 0.05)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n\n###################################################################\n\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;1.3 男性和女性的种族(Race)分布是否相同？\n\n&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d_race <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(race <span style="color:#f92672">=</span> data<span style="color:#f92672">$</span>Race, sex <span style="color:#f92672">=</span> data<span style="color:#f92672">$</span>Gender) <span style="color:#75715e"># 组合</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 卡方检验</span>
+</span></span><span style="display:flex;"><span>result3 <span style="color:#f92672">=</span> <span style="color:#a6e22e">chisq.test</span>(<span style="color:#a6e22e">table</span>(d_race),correct<span style="color:#f92672">=</span>F)
+</span></span><span style="display:flex;"><span>result3<span style="color:#f92672">$</span>expected
+</span></span><span style="display:flex;"><span>result3
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;综上, 男性和女性的种族分布之间未观察到显著差异(p = 0.6875,p &gt; 0.05)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n\n###################################################################\n\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;2. 如下两种白喉杆菌培养基培养结果是否相同？\n\n&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建2x2的矩阵</span>
+</span></span><span style="display:flex;"><span>d_2methods <span style="color:#f92672">=</span> <span style="color:#a6e22e">matrix</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">36</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">24</span>,<span style="color:#ae81ff">135</span>), nrow<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>  dimnames <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(<span style="color:#e6db74">&#34;Method 2&#34;</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;+&#34;</span>,<span style="color:#e6db74">&#34;-&#34;</span>),
+</span></span><span style="display:flex;"><span>                  <span style="color:#e6db74">&#34;Method 1&#34;</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;+&#34;</span>,<span style="color:#e6db74">&#34;-&#34;</span>)
+</span></span><span style="display:flex;"><span>                  )
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d_2methods
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 进行McNemar检验</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mcnemar.test</span>(d_2methods,correct <span style="color:#f92672">=</span> F)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;综上, 两种不同白喉杆菌培养基培养结果之间存在显著差异(p = 0.01635,p &lt; 0.05)&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;\n&#34;</span>)
+</span></span></code></pre></div><h2 id="results">Results</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">###################################################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.1</span> 试评价不同教育程度(Education)的BMI是否有差别？如果有,哪两组有差别？
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Call<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#a6e22e">aov</span>(formula <span style="color:#f92672">=</span> d_BMI <span style="color:#f92672">~</span> d_Education, data <span style="color:#f92672">=</span> d_BMI_edu)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Terms<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                d_Education Residuals
+</span></span><span style="display:flex;"><span>Sum of Squares         <span style="color:#ae81ff">7.84</span>  <span style="color:#ae81ff">40535.99</span>
+</span></span><span style="display:flex;"><span>Deg. of Freedom           <span style="color:#ae81ff">1</span>      <span style="color:#ae81ff">1239</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Residual standard error<span style="color:#f92672">:</span> <span style="color:#ae81ff">5.719851</span>
+</span></span><span style="display:flex;"><span>Estimated effects may be unbalanced
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">36</span> observations deleted due to missingness
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      difference pvalue signif.         LCL         UCL
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">-1.7445839</span> <span style="color:#ae81ff">0.0045</span>      <span style="color:#f92672">**</span> <span style="color:#ae81ff">-3.08044758</span> <span style="color:#ae81ff">-0.40872016</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">-1.3112591</span> <span style="color:#ae81ff">0.0314</span>       <span style="color:#f92672">*</span> <span style="color:#ae81ff">-2.52976757</span> <span style="color:#ae81ff">-0.09275068</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">-0.9836367</span> <span style="color:#ae81ff">0.0584</span>       . <span style="color:#ae81ff">-2.00240571</span>  <span style="color:#ae81ff">0.03513236</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">0.1579075</span> <span style="color:#ae81ff">0.7611</span>         <span style="color:#ae81ff">-0.86086150</span>  <span style="color:#ae81ff">1.17667658</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">0.4333247</span> <span style="color:#ae81ff">0.4042</span>         <span style="color:#ae81ff">-0.58544430</span>  <span style="color:#ae81ff">1.45209378</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">0.7609472</span> <span style="color:#ae81ff">0.3080</span>         <span style="color:#ae81ff">-0.45756125</span>  <span style="color:#ae81ff">1.97945563</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">1.9024914</span> <span style="color:#ae81ff">0.0024</span>      <span style="color:#f92672">**</span>  <span style="color:#ae81ff">0.48391827</span>  <span style="color:#ae81ff">3.32106455</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">0.3276224</span> <span style="color:#ae81ff">0.5282</span>         <span style="color:#ae81ff">-0.69114659</span>  <span style="color:#ae81ff">1.34639149</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">1.4691667</span> <span style="color:#ae81ff">0.0245</span>       <span style="color:#f92672">*</span>  <span style="color:#ae81ff">0.13330296</span>  <span style="color:#ae81ff">2.80503038</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">1.1415442</span> <span style="color:#ae81ff">0.0718</span>       . <span style="color:#ae81ff">-0.07696422</span>  <span style="color:#ae81ff">2.36005266</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>综上, 由SNK多重比较可见, 教育程度组中<span style="color:#ae81ff">1-2</span>, <span style="color:#ae81ff">1-3</span>, <span style="color:#ae81ff">2-5</span>, <span style="color:#ae81ff">3-5</span>存在明显差异
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">###################################################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1.2</span> 男性和女性的教育程度构成是否相同？
+</span></span><span style="display:flex;"><span>   sex
+</span></span><span style="display:flex;"><span>edu        <span style="color:#ae81ff">1</span>         <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">146.8312</span> <span style="color:#ae81ff">136.16876</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">102.7300</span>  <span style="color:#ae81ff">95.27002</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">159.2834</span> <span style="color:#ae81ff">147.71664</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">131.2661</span> <span style="color:#ae81ff">121.73391</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">120.8893</span> <span style="color:#ae81ff">112.11068</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Pearson<span style="color:#e6db74">&#39;s Chi-squared test
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">data:  table(d_edu)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">X-squared = 16.607, df = 4, p-value = 0.002304
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">综上, 男性和女性的教育程度构成存在显著差异(p = 0.002304,p &lt; 0.05)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">###################################################################
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1.3 男性和女性的种族(Race)分布是否相同？
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    sex
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">race         1         2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   1 131.67424 122.32576
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   2  31.62255  29.37745
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   3 376.36022 349.63978
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   4 107.82772 100.17228
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   5  14.51527  13.48473
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        Pearson&#39;</span>s Chi<span style="color:#f92672">-</span>squared test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data<span style="color:#f92672">:</span>  <span style="color:#a6e22e">table</span>(d_race)
+</span></span><span style="display:flex;"><span>X<span style="color:#f92672">-</span>squared <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.2628</span>, df <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, p<span style="color:#f92672">-</span>value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.6875</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>综上, 男性和女性的种族分布之间未观察到显著差异(p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.6875</span>,p <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.05</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">###################################################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>. 如下两种白喉杆菌培养基培养结果是否相同？
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Method <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>Method <span style="color:#ae81ff">2</span>  <span style="color:#f92672">+</span>   <span style="color:#f92672">-</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">+</span> <span style="color:#ae81ff">36</span>  <span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">-</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">135</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        McNemar<span style="color:#e6db74">&#39;s Chi-squared test
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">data:  d_2methods
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">McNemar&#39;</span>s chi<span style="color:#f92672">-</span>squared <span style="color:#f92672">=</span> <span style="color:#ae81ff">5.7647</span>, df <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, p<span style="color:#f92672">-</span>value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01635</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>综上, 两种不同白喉杆菌培养基培养结果之间存在显著差异(p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.01635</span>,p <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.05</span>)
+</span></span></code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#questions">Questions</a></li>
+    <li><a href="#codes">Codes</a></li>
+    <li><a href="#results">Results</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="/rlang/r_homework03/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">R_homework03&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2023 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>
