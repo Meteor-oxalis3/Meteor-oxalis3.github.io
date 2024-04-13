@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Gene Database // Meteor03&#39;s Oxalis Garden</title>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Run VSCode-Server on older Linux distributions // Meteor03&#39;s Oxalis Garden</title>
 
     <meta charset="utf-8">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -10,19 +10,19 @@
     
     
 
-        <meta property="og:title" content="Gene Database" />
+        <meta property="og:title" content="Run VSCode-Server on older Linux distributions" />
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en" />
-    <meta property="og:url" content="https://meteor-oxalis3.github.io/mysql/gene-database/" />
+    <meta property="og:url" content="http://localhost:1313/linux/vscode/" />
     
 
     <link rel="shortcut icon" href="/favicon.ico">
 
-    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="http://localhost:1313/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="http://localhost:1313/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    <link rel="stylesheet" href="http://localhost:1313/css/style.css">
     
 
     <meta name="generator" content="Hugo 0.124.1">
@@ -35,7 +35,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <a id="logo" class="logo-text" href="http://localhost:1313/">Meteor03&#39;s Oxalis Garden</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="/hugo/">Hugo</a>
@@ -64,41 +64,40 @@
     <div class="article-inner">
         
         <header class="article-header">
-            <h1 class="article-title" itemprop="name">Gene Database</h1>
+            <h1 class="article-title" itemprop="name">Run VSCode-Server on older Linux distributions</h1>
         </header>
         
         <div class="article-meta">
-            <a href="/mysql/gene-database/" class="article-date">
-                <time datetime='2023-12-08T00:59:26.000&#43;08:00' itemprop="datePublished">2023-12-08</time>
+            <a href="/linux/vscode/" class="article-date">
+                <time datetime='2024-03-29T10:00:30.000&#43;08:00' itemprop="datePublished">2024-03-29</time>
             </a>
             
             
             
         </div>
         <div class="article-entry" itemprop="articleBody">
-            <h1 id="meteor03s-gene-database">Meteor03&rsquo;s Gene Database</h1>
-<p><em><strong>(The final homework of MySQL lesson)</strong></em></p>
-<h2 id="codes-in-gitlab">Codes in Gitlab</h2>
-<ul>
-<li><a href="https://gitlab.meteor03.top/Meteor_Oxalis3/Gene-DataBase">Gitlab</a></li>
-</ul>
-<h2 id="development-environment">Development Environment</h2>
-<p><img src="https://www.freebsd.org/gifs/banner1.gif" alt="FreeBSD" title="Powered by FreeBSD"></p>
-<ul>
-<li>OS <em>Powered by</em>  <strong>FreeBSD 14.0-RELEASE amd64</strong></li>
-<li>Database <em>Powered by</em> <strong>MySQL Ver 8.0.33 for FreeBSD14.0 on amd64</strong></li>
-<li>JDBC driver <em>Powered by</em> <strong>mysql-connector-j-8.2.0.jar</strong></li>
-<li>Cloud Service <em>Powered by</em> <strong>Huawei Cloud</strong></li>
-<li>Java Server Pages <em>Powered by</em>  <strong>Tomcat-10.1.16</strong></li>
-</ul>
-<h2 id="production-environment">Production Environment</h2>
-<ul>
-<li>OS <em>Powered by</em> <strong>Ubuntu 22.04.3 LTS x86_64</strong></li>
-<li>Database <em>Powered by</em> <strong>MySQL Ver 8.0.33 for FreeBSD14.0 on amd64</strong></li>
-<li>JDBC driver <em>Powered by</em> <strong>mysql-connector-j-8.2.0.jar</strong></li>
-<li>Cloud Service <em>Powered by</em> <strong>Alibaba Cloud</strong></li>
-<li>Java Server Pages <em>Powered by</em> <strong>Tomcat-9.0.58</strong></li>
-</ul>
+            <h2 id="1-notice">1. Notice</h2>
+<blockquote>
+<p><a href="https://code.visualstudio.com/docs/remote/faq#_can-i-run-vs-code-server-on-older-linux-distributions" target="_blank">Can I run VS Code Server on older Linux distributions?</a></p>
+</blockquote>
+<p>Starting with VS Code release 1.86.1 (January 2024), the minimum requirements for the build toolchain of the remote server were raised. The prebuilt servers distributed by VS Code are compatible with Linux distributions based on glibc 2.28 or later, for example, Debian 10, RHEL 8, or Ubuntu 20.04. VS Code will still allow users to connect to an OS that is not supported by VS Code (OS that does not provide glibc &gt;= 2.28 and libstdc++ &gt;= 3.4.25) until February 2025. This allows time for you and your companies to migrate to newer Linux distributions. VS Code will show a dialog and banner message when you connect to an OS version that is not supported by VS Code.</p>
+<h2 id="2-solution">2. Solution</h2>
+<ol>
+<li></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd ~/.vscode-server/bin/05047486b6df5eb8d44b2ecd70ea3bdf775fd937
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>patchelf --set-interpreter /home/biotools/glibc-2.39/lib/ld-linux-x86-64.so.2 --set-rpath /home/biotools/glibc-2.39/lib:/usr/lib/x86_64-linux-gnu --force-rpath node
+</span></span></code></pre></div><ol start="2">
+<li></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vim bin/helpers/check-requirements.sh
+</span></span></code></pre></div><ol start="3">
+<li>在 &ldquo;set -e&rdquo; 前一行加上 exit 0</li>
+<li>保存退出</li>
+<li>打开VSCode，重新连接服务器</li>
+</ol>
 
         </div>
 
@@ -108,9 +107,8 @@
             <h3>Contents</h3>
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#codes-in-gitlab">Codes in Gitlab</a></li>
-    <li><a href="#development-environment">Development Environment</a></li>
-    <li><a href="#production-environment">Production Environment</a></li>
+    <li><a href="#1-notice">1. Notice</a></li>
+    <li><a href="#2-solution">2. Solution</a></li>
   </ul>
 </nav>
         </div>
@@ -125,15 +123,9 @@
     
 <nav id="article-nav">
     
-    <a href="/article/the_truth_in_the_mirror/" id="article-nav-newer" class="article-nav-link-wrap">
-        <div class="article-nav-title"><span>&lt;</span>&nbsp;
-            The Truth In The Mirror
-        </div>
-    </a>
     
-    
-    <a href="/rlang/r_homework02/" id="article-nav-older" class="article-nav-link-wrap">
-        <div class="article-nav-title">R_homework02&nbsp;<span>&gt;</span></div>
+    <a href="/hugo/html_support/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">HTML Support&nbsp;<span>&gt;</span></div>
     </a>
     
 </nav>

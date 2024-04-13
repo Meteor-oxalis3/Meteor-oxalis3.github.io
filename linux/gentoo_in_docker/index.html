@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gentoo in Docker // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Gentoo in Docker" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/linux/gentoo_in_docker/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.124.1">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/hugo/">Hugo</a>
+                
+                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                
+                <a class="main-nav-link" href="/rlang/">Rlang</a>
+                
+                <a class="main-nav-link" href="/clang/">Clang</a>
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+                <a class="main-nav-link" href="/linux/">Linux</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Gentoo in Docker</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/linux/gentoo_in_docker/" class="article-date">
+                <time datetime='2024-04-13T22:35:37.000&#43;08:00' itemprop="datePublished">2024-04-13</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="host-machine-info">Host Machine Info</h2>
+<ul>
+<li>Host:  <b>Raspberry Pi 5</b> Model B Rev 1.0</li>
+<li>OS:  <b>Alpine Linux</b> v3.19 aarch64</li>
+<li>CPU:  (4) @ 2.400GHz</li>
+<li>Memory:  7946MiB</li>
+<li>Shell:  fish 3.6.3</li>
+<li>Kernel: 6.6.14-0-rpi</li>
+</ul>
+<hr>
+<h2 id="preparations">Preparations</h2>
+<h3 id="pull-docker-image">Pull Docker image</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker pull gentoo/stage3
+</span></span></code></pre></div><h3 id="download-stage3-image">Download stage3 image</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># According to the current distribution</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># &#34;https://distfiles.gentoo.org/releases/arm64/autobuilds/&#34;</span>
+</span></span><span style="display:flex;"><span>wget https://distfiles.gentoo.org/releases/arm64/autobuilds/20240407T234908Z/stage3-arm64-openrc-20240407T234908Z.tar.xz
+</span></span></code></pre></div><h3 id="unzip-stage3-image">Unzip stage3 image</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mkdir 04_Gentoo_in_Docker
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd 04_Gentoo_in_Docker
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cp /path/to/stage3-*.tar.xz .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo tar xpvf stage3-*.tar.xz
+</span></span></code></pre></div><h3 id="run-docker">Run Docker</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>docker run -it --name Gentoo --restart<span style="color:#f92672">=</span>always <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/etc:/etc <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/usr:/usr <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/bin:/bin <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/root:/root <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/var:/var <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/opt:/opt <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/home:/home <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/lib:/lib <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/lib64:/lib64 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/mnt:/mnt <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/media:/media <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/boot:/boot <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/sbin:/sbin <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/sys:/sys <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/tmp:/tmp <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -v /home/oxalis/04_Gentoo_in_Docker/run:/run <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -p 127.0.0.1:2222:22 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    -d gentoo/stage3
+</span></span></code></pre></div><h3 id="enter-container">Enter Container</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker exec -it Gentoo /bin/bash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>useradd &lt;username&gt; -m -G wheel
+</span></span></code></pre></div><h2 id="extra">Extra</h2>
+<h3 id="enable-ssh-service">Enable SSH Service</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh-keygen -A
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>exit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>docker exec -it Gentoo /sbin/sshd
+</span></span></code></pre></div><h2 id="enjoy">Enjoy!</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ssh -p <span style="color:#ae81ff">2222</span> &lt;username&gt;@127.0.0.1
+</span></span></code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#host-machine-info">Host Machine Info</a></li>
+    <li><a href="#preparations">Preparations</a>
+      <ul>
+        <li><a href="#pull-docker-image">Pull Docker image</a></li>
+        <li><a href="#download-stage3-image">Download stage3 image</a></li>
+        <li><a href="#unzip-stage3-image">Unzip stage3 image</a></li>
+        <li><a href="#run-docker">Run Docker</a></li>
+        <li><a href="#enter-container">Enter Container</a></li>
+      </ul>
+    </li>
+    <li><a href="#extra">Extra</a>
+      <ul>
+        <li><a href="#enable-ssh-service">Enable SSH Service</a></li>
+      </ul>
+    </li>
+    <li><a href="#enjoy">Enjoy!</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="/hugo/html_support/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">HTML Support&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2024 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>
