@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>R_homework_01 // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="R_homework_01" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/rlang/r_homework_01/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.125.4">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/hugo/">Hugo</a>
+                
+                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                
+                <a class="main-nav-link" href="/rlang/">Rlang</a>
+                
+                <a class="main-nav-link" href="/clang/">Clang</a>
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+                <a class="main-nav-link" href="/linux/">Linux</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">R_homework_01</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/rlang/r_homework_01/" class="article-date">
+                <time datetime='2024-04-27T09:40:43.000&#43;08:00' itemprop="datePublished">2024-04-27</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="questions">Questions</h2>
+<p><img src="/images/R02_question_01.png" alt=""></p>
+<h2 id="codes">Codes</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Rstudio Server URL: http://202.195.187.9:8787/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 账号密码与Linux一致</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换R路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">.libPaths</span>(<span style="color:#e6db74">&#34;/home/biotools/anaconda3/envs/R4.3.1/lib/R/&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q1: 画出二元正态分布N2(μ1=0, μ2=0, σ12=1, σ22=2, ρ=-0.5)的三维概率密度函数图</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(mvtnorm)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mu <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>sigma <span style="color:#f92672">=</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">-0.5</span>, <span style="color:#ae81ff">-0.5</span>, <span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 准备三维坐标点</span>
+</span></span><span style="display:flex;"><span>y.points <span style="color:#f92672">=</span> x.points <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">-3</span>, <span style="color:#ae81ff">3</span>, length.out <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>)
+</span></span><span style="display:flex;"><span>z <span style="color:#f92672">=</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#ae81ff">0</span>,nrow <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>, ncol <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">200</span>){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">200</span>){
+</span></span><span style="display:flex;"><span>    z[i,j] <span style="color:#f92672">=</span> <span style="color:#a6e22e">dmvnorm</span>(<span style="color:#a6e22e">c</span>(x.points[i], y.points[j]),
+</span></span><span style="display:flex;"><span>                     mean<span style="color:#f92672">=</span>mu, sigma<span style="color:#f92672">=</span>sigma)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(rgl)
+</span></span><span style="display:flex;"><span>res <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(x<span style="color:#f92672">=</span>x.points, y<span style="color:#f92672">=</span>y.points, z<span style="color:#f92672">=</span>z)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 加颜色</span>
+</span></span><span style="display:flex;"><span>coll <span style="color:#f92672">=</span> <span style="color:#a6e22e">rainbow</span>(<span style="color:#a6e22e">length</span>(z))<span style="color:#a6e22e">[rank</span>(z)]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">persp3d</span>(x<span style="color:#f92672">=</span>res, xlab<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;x&#34;</span>, ylab<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;y&#34;</span>, zlab<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;density&#34;</span>, col<span style="color:#f92672">=</span>coll,rgl.printRglwidget <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 缺少&#34;OpenGL functions&#34;的解决方法</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">rglwidget</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q2: 根据配对设计和成组设计多元T检验的公式，自行编写进行两类检验的R函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义函数</span>
+</span></span><span style="display:flex;"><span>RawHotellingsT2Test <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">function</span>(x, y<span style="color:#f92672">=</span><span style="color:#66d9ef">NULL</span>, mu<span style="color:#f92672">=</span><span style="color:#66d9ef">NULL</span>, test<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;f&#34;</span>,<span style="color:#66d9ef">...</span>) {
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  `HotellingsT.internal`  <span style="color:#f92672">&lt;-</span>  <span style="color:#66d9ef">function</span>(x, y<span style="color:#f92672">=</span><span style="color:#66d9ef">NULL</span>, mu, test) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dim</span>(x)[1]
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dim</span>(x)[2]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 单样本</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">is.null</span>(y))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      test.statistic <span style="color:#f92672">&lt;-</span> n<span style="color:#f92672">*</span><span style="color:#a6e22e">as.numeric</span>(<span style="color:#a6e22e">t</span>(<span style="color:#a6e22e">colMeans</span>(x)<span style="color:#f92672">-</span>mu)<span style="color:#f92672">%*%</span><span style="color:#a6e22e">solve</span>(<span style="color:#a6e22e">cov</span>(x))<span style="color:#f92672">%*%</span>(<span style="color:#a6e22e">colMeans</span>(x)<span style="color:#f92672">-</span>mu))<span style="color:#f92672">*</span><span style="color:#66d9ef">switch</span>(test,f<span style="color:#f92672">=</span>(n<span style="color:#f92672">-</span>p)<span style="color:#f92672">/</span>(p<span style="color:#f92672">*</span>(n<span style="color:#ae81ff">-1</span>)),chi<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>      df.1 <span style="color:#f92672">&lt;-</span> p
+</span></span><span style="display:flex;"><span>      df.2 <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">switch</span>(test,f<span style="color:#f92672">=</span>n<span style="color:#f92672">-</span>p,chi<span style="color:#f92672">=</span><span style="color:#66d9ef">NA</span>)
+</span></span><span style="display:flex;"><span>      p.value <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">-</span><span style="color:#66d9ef">switch</span>(test,f<span style="color:#f92672">=</span><span style="color:#a6e22e">pf</span>(test.statistic,df.1,df.2),chi<span style="color:#f92672">=</span><span style="color:#a6e22e">pchisq</span>(test.statistic,df.1))
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>(<span style="color:#a6e22e">list</span>(test.statistic<span style="color:#f92672">=</span>test.statistic,p.value<span style="color:#f92672">=</span>p.value,df.1<span style="color:#f92672">=</span>df.1,df.2<span style="color:#f92672">=</span>df.2))
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 双样本</span>
+</span></span><span style="display:flex;"><span>    n1 <span style="color:#f92672">&lt;-</span> n
+</span></span><span style="display:flex;"><span>    n2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dim</span>(y)[1]
+</span></span><span style="display:flex;"><span>    xmeans <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">colMeans</span>(x)
+</span></span><span style="display:flex;"><span>    ymeans <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">colMeans</span>(y)
+</span></span><span style="display:flex;"><span>    x.diff <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sweep</span>(x,<span style="color:#ae81ff">2</span>,xmeans)
+</span></span><span style="display:flex;"><span>    y.diff <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sweep</span>(y,<span style="color:#ae81ff">2</span>,ymeans)
+</span></span><span style="display:flex;"><span>    S.pooled <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>(n1<span style="color:#f92672">+</span>n2<span style="color:#ae81ff">-2</span>)<span style="color:#f92672">*</span>(<span style="color:#a6e22e">t</span>(x.diff)<span style="color:#f92672">%*%</span>x.diff<span style="color:#f92672">+</span><span style="color:#a6e22e">t</span>(y.diff)<span style="color:#f92672">%*%</span>y.diff)
+</span></span><span style="display:flex;"><span>    test.statistic <span style="color:#f92672">&lt;-</span> n1<span style="color:#f92672">*</span>n2<span style="color:#f92672">/</span>(n1<span style="color:#f92672">+</span>n2)<span style="color:#f92672">*</span><span style="color:#a6e22e">t</span>(xmeans<span style="color:#f92672">-</span>ymeans<span style="color:#f92672">-</span>mu)<span style="color:#f92672">%*%</span><span style="color:#a6e22e">solve</span>(S.pooled)<span style="color:#f92672">%*%</span>(xmeans<span style="color:#f92672">-</span>ymeans<span style="color:#f92672">-</span>mu)<span style="color:#f92672">*</span><span style="color:#66d9ef">switch</span>(test,f<span style="color:#f92672">=</span>(n1<span style="color:#f92672">+</span>n2<span style="color:#f92672">-</span>p<span style="color:#ae81ff">-1</span>)<span style="color:#f92672">/</span>(p<span style="color:#f92672">*</span>(n1<span style="color:#f92672">+</span>n2<span style="color:#ae81ff">-2</span>)),chi<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    df.1 <span style="color:#f92672">&lt;-</span> p
+</span></span><span style="display:flex;"><span>    df.2 <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">switch</span>(test,f<span style="color:#f92672">=</span>n1<span style="color:#f92672">+</span>n2<span style="color:#f92672">-</span>p<span style="color:#ae81ff">-1</span>,chi<span style="color:#f92672">=</span><span style="color:#66d9ef">NA</span>)
+</span></span><span style="display:flex;"><span>    p.value <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">-</span><span style="color:#66d9ef">switch</span>(test,f<span style="color:#f92672">=</span><span style="color:#a6e22e">pf</span>(test.statistic,df.1,df.2),chi<span style="color:#f92672">=</span><span style="color:#a6e22e">pchisq</span>(test.statistic,df.1))
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">list</span>(test.statistic<span style="color:#f92672">=</span>test.statistic,p.value<span style="color:#f92672">=</span>p.value,df.1<span style="color:#f92672">=</span>df.1,df.2<span style="color:#f92672">=</span>df.2)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">is.null</span>(y)) {
+</span></span><span style="display:flex;"><span>    DNAME <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">deparse</span>(<span style="color:#a6e22e">substitute</span>(x))
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    DNAME<span style="color:#f92672">=</span><span style="color:#a6e22e">paste</span>(<span style="color:#a6e22e">deparse</span>(<span style="color:#a6e22e">substitute</span>(x)),<span style="color:#e6db74">&#34;and&#34;</span>,<span style="color:#a6e22e">deparse</span>(<span style="color:#a6e22e">substitute</span>(y)))
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  xok <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">complete.cases</span>(x)
+</span></span><span style="display:flex;"><span>  x <span style="color:#f92672">&lt;-</span> x[xok,]
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">all</span>(<span style="color:#a6e22e">sapply</span>(x, is.numeric))) <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;&#39;x&#39; must be numeric&#34;</span>)
+</span></span><span style="display:flex;"><span>  x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.matrix</span>(x)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dim</span>(x)[2]
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">is.null</span>(y)) {
+</span></span><span style="display:flex;"><span>    yok <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">complete.cases</span>(y)
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">&lt;-</span> y[yok,]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">all</span>(<span style="color:#a6e22e">sapply</span>(y, is.numeric))) <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;&#39;y&#39; must be numeric&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (p<span style="color:#f92672">!=</span><span style="color:#a6e22e">dim</span>(y)[2]) <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;&#39;x&#39; and &#39;y&#39; must have the same number of columns&#34;</span>)
+</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.matrix</span>(y)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">is.null</span>(mu)) mu <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>,p)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">length</span>(mu)<span style="color:#f92672">!=</span>p) <span style="color:#a6e22e">stop</span>(<span style="color:#e6db74">&#34;length of &#39;mu&#39; must equal the number of columns of &#39;x&#39;&#34;</span>)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">is.null</span>(y)) version <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;one.sample.f&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">is.null</span>(y)) version <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;two.sample.f&#34;</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  res1 <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">switch</span>(version,
+</span></span><span style="display:flex;"><span>                 <span style="color:#e6db74">&#34;one.sample.f&#34;</span><span style="color:#f92672">=</span>{
+</span></span><span style="display:flex;"><span>                   result <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">HotellingsT.internal</span>(x,mu<span style="color:#f92672">=</span>mu,test<span style="color:#f92672">=</span>test)
+</span></span><span style="display:flex;"><span>                   STATISTIC <span style="color:#f92672">&lt;-</span> result<span style="color:#f92672">$</span>test.statistic
+</span></span><span style="display:flex;"><span>                   <span style="color:#a6e22e">names</span>(STATISTIC) <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;T.2&#34;</span>
+</span></span><span style="display:flex;"><span>                   PVAL <span style="color:#f92672">&lt;-</span> result<span style="color:#f92672">$</span>p.value
+</span></span><span style="display:flex;"><span>                   METHOD <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hotelling&#39;s one sample T2-test&#34;</span>
+</span></span><span style="display:flex;"><span>                   PARAMETER <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(result<span style="color:#f92672">$</span>df.1,result<span style="color:#f92672">$</span>df.2)
+</span></span><span style="display:flex;"><span>                   <span style="color:#a6e22e">names</span>(PARAMETER) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;df1&#34;</span>,<span style="color:#e6db74">&#34;df2&#34;</span>)
+</span></span><span style="display:flex;"><span>                   RVAL <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>(statistic<span style="color:#f92672">=</span>STATISTIC,p.value<span style="color:#f92672">=</span>PVAL,method<span style="color:#f92672">=</span>METHOD,parameter<span style="color:#f92672">=</span>PARAMETER)
+</span></span><span style="display:flex;"><span>                   
+</span></span><span style="display:flex;"><span>                   RVAL}
+</span></span><span style="display:flex;"><span>                 ,
+</span></span><span style="display:flex;"><span>                 <span style="color:#e6db74">&#34;two.sample.f&#34;</span><span style="color:#f92672">=</span>{
+</span></span><span style="display:flex;"><span>                   result <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">HotellingsT.internal</span>(x,y,mu,test)
+</span></span><span style="display:flex;"><span>                   STATISTIC <span style="color:#f92672">&lt;-</span> result<span style="color:#f92672">$</span>test.statistic
+</span></span><span style="display:flex;"><span>                   <span style="color:#a6e22e">names</span>(STATISTIC) <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;T.2&#34;</span>
+</span></span><span style="display:flex;"><span>                   PVAL <span style="color:#f92672">&lt;-</span> result<span style="color:#f92672">$</span>p.value
+</span></span><span style="display:flex;"><span>                   METHOD <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;Hotelling&#39;s two sample T2-test&#34;</span>
+</span></span><span style="display:flex;"><span>                   PARAMETER <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(result<span style="color:#f92672">$</span>df.1,result<span style="color:#f92672">$</span>df.2)
+</span></span><span style="display:flex;"><span>                   <span style="color:#a6e22e">names</span>(PARAMETER) <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;df1&#34;</span>,<span style="color:#e6db74">&#34;df2&#34;</span>)
+</span></span><span style="display:flex;"><span>                   RVAL <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>(statistic<span style="color:#f92672">=</span>STATISTIC,p.value<span style="color:#f92672">=</span>PVAL,method<span style="color:#f92672">=</span>METHOD,parameter<span style="color:#f92672">=</span>PARAMETER)
+</span></span><span style="display:flex;"><span>                   
+</span></span><span style="display:flex;"><span>                   RVAL}
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>  ALTERNATIVE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;two.sided&#34;</span>
+</span></span><span style="display:flex;"><span>  NVAL <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#34;c(&#34;</span>,<span style="color:#a6e22e">paste</span>(mu,collapse<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;,&#34;</span>),<span style="color:#e6db74">&#34;)&#34;</span>,sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">is.null</span>(y)) <span style="color:#a6e22e">names</span>(NVAL) <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;location&#34;</span> <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">names</span>(NVAL) <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;location difference&#34;</span>
+</span></span><span style="display:flex;"><span>  res <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(res1,<span style="color:#a6e22e">list</span>(data.name<span style="color:#f92672">=</span>DNAME,alternative<span style="color:#f92672">=</span>ALTERNATIVE,null.value<span style="color:#f92672">=</span>NVAL))
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">class</span>(res) <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;htest&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(res)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 读取文件</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;./01/x1x2group.csv&#34;</span>, header<span style="color:#f92672">=</span>T, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\t&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># a1, a2分别为A组和B组的数据</span>
+</span></span><span style="display:flex;"><span>a1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;./01/a1.csv&#34;</span>, header<span style="color:#f92672">=</span>F, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\t&#34;</span>)
+</span></span><span style="display:flex;"><span>a2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;./01/a2.csv&#34;</span>, header<span style="color:#f92672">=</span>F, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\t&#34;</span>)
+</span></span><span style="display:flex;"><span>a3 <span style="color:#f92672">=</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;./01/a3.csv&#34;</span>, header<span style="color:#f92672">=</span>T, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;\t&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">RawHotellingsT2Test</span>(a1, a2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q3: 基因差异表达分析在于发现基因在两组间的表达水平是否一致。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     若某信号通路A包含5个基因(Gene1~5)，请检验两组(group)在整个通路上的</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     基因表达水平是否一致？【“练习用数据-02.csv”】</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    (注：基于芯片技术的基因表达量经过变换后可假设正态)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 引入DescTools库</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(DescTools)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 读取文件</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;./01/Practice-01.csv&#34;</span>, header<span style="color:#f92672">=</span>T, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取group1</span>
+</span></span><span style="display:flex;"><span>data_grp1 <span style="color:#f92672">=</span> data[data<span style="color:#f92672">$</span>group <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>,<span style="color:#f92672">-</span><span style="color:#a6e22e">which</span>(<span style="color:#a6e22e">names</span>(data) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;group&#34;</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取group0</span>
+</span></span><span style="display:flex;"><span>data_grp0 <span style="color:#f92672">=</span> data[data<span style="color:#f92672">$</span>group <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>,<span style="color:#f92672">-</span><span style="color:#a6e22e">which</span>(<span style="color:#a6e22e">names</span>(data) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;group&#34;</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 成组设计多元T检验: Hotelling T²检验</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">HotellingsT2Test</span>(data_grp0, data_grp1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#formula形式</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">HotellingsT2Test</span>(<span style="color:#a6e22e">cbind</span>(Gene1, Gene2, Gene3, Gene4, Gene5)<span style="color:#f92672">~</span> group, data<span style="color:#f92672">=</span>data)
+</span></span></code></pre></div><h2 id="output">Output</h2>
+<h3 id="graph">Graph</h3>
+<p><img src="/images/rgl.gif" alt=""></p>
+<h3 id="data">Data</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Hotelling&#39;s two sample T2-test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data:  a1 and a2
+</span></span><span style="display:flex;"><span>T.2 = 8.0362, df1 = 2, df2 = 19, p-value = 0.002958
+</span></span><span style="display:flex;"><span>alternative hypothesis: true location difference is not equal to c(0,0)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Hotelling&#39;s two sample T2-test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data:  data_grp0 and data_grp1
+</span></span><span style="display:flex;"><span>T.2 = 3.4884, df1 = 5, df2 = 94, p-value = 0.006166
+</span></span><span style="display:flex;"><span>alternative hypothesis: true location difference is not equal to c(0,0,0,0,0)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Hotelling&#39;s two sample T2-test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data:  cbind(Gene1, Gene2, Gene3, Gene4, Gene5) by group
+</span></span><span style="display:flex;"><span>T.2 = 3.4884, df1 = 5, df2 = 94, p-value = 0.006166
+</span></span><span style="display:flex;"><span>alternative hypothesis: true location difference is not equal to c(0,0,0,0,0)
+</span></span></code></pre></div><h2 id="result">Result</h2>
+<ul>
+<li>p值为0.006166，小于0.05，表明我们有足够的证据拒绝原假设，即两组数据在整个通路上的基因表达水平存在显著差异。</li>
+<li>答: 两组在整个通路上的基因表达水平不一致，存在显著差异。</li>
+</ul>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#questions">Questions</a></li>
+    <li><a href="#codes">Codes</a></li>
+    <li><a href="#output">Output</a>
+      <ul>
+        <li><a href="#graph">Graph</a></li>
+        <li><a href="#data">Data</a></li>
+      </ul>
+    </li>
+    <li><a href="#result">Result</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="/linux/gentoo_in_docker/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Gentoo in Docker&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2024 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>
