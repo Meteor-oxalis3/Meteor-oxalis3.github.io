@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>R_homework_02 // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="R_homework_02" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/rlang/r_homework_02/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.125.5">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/hugo/">Hugo</a>
+                
+                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                
+                <a class="main-nav-link" href="/rlang/">Rlang</a>
+                
+                <a class="main-nav-link" href="/clang/">Clang</a>
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+                <a class="main-nav-link" href="/linux/">Linux</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">R_homework_02</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/rlang/r_homework_02/" class="article-date">
+                <time datetime='2024-05-04T14:46:23.000&#43;08:00' itemprop="datePublished">2024-05-04</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="questions">Questions</h2>
+<p><img src="/images/R02_question_02.png" alt=""></p>
+<h2 id="codes">Codes</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Rstudio Server URL: http://202.195.187.9:8787/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 账号密码与Linux一致</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换R路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">.libPaths</span>(<span style="color:#e6db74">&#34;/home/biotools/anaconda3/envs/R4.3.1/lib/R/&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 读入练习数据集 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (sex性别, age年龄, eth种族, BMI体重指数, act运动量, Pb/Cd/Hg三种重金属浓度)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 试做如下分析:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q1: 不同性别人群在三种重金属浓度上是否有差异? </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 引入DescTools库</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(DescTools)
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;02/Practice-2.csv&#34;</span>, header<span style="color:#f92672">=</span>T, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;,&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取sex1的重金属</span>
+</span></span><span style="display:flex;"><span>data_sex1_b <span style="color:#f92672">=</span> data[data<span style="color:#f92672">$</span>sex <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;b_Pb&#34;</span>, <span style="color:#e6db74">&#34;b_Cd&#34;</span>, <span style="color:#e6db74">&#34;b_Hg&#34;</span>)]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取sex2的重金属</span>
+</span></span><span style="display:flex;"><span>data_sex2_b <span style="color:#f92672">=</span> data[data<span style="color:#f92672">$</span>sex <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;b_Pb&#34;</span>, <span style="color:#e6db74">&#34;b_Cd&#34;</span>, <span style="color:#e6db74">&#34;b_Hg&#34;</span>)]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 成组设计多元T检验: Hotelling T²检验</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">HotellingsT2Test</span>(data_sex1_b, data_sex2_b)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q2: 对前400个样本使用逐步回归建立其它变量与BMI的回归模型,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     给出最终模型的R2，调整R2、剩余标准差以及AIC</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 前400行数据</span>
+</span></span><span style="display:flex;"><span>data_400 <span style="color:#f92672">=</span> data[1<span style="color:#f92672">:</span><span style="color:#ae81ff">400</span>, ]
+</span></span><span style="display:flex;"><span>data_400 <span style="color:#f92672">=</span> data_400<span style="color:#a6e22e">[complete.cases</span>(data_400),]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 建立初始线性回归模型</span>
+</span></span><span style="display:flex;"><span>full.m <span style="color:#f92672">=</span> <span style="color:#a6e22e">lm</span>(BMI<span style="color:#f92672">~</span>., data <span style="color:#f92672">=</span> data_400)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">step</span>(full.m, direction<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;both&#34;</span>, scope<span style="color:#f92672">=</span><span style="color:#a6e22e">formula</span>(full.m))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取R²、、以及AIC</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(full.m)<span style="color:#f92672">$</span>r.squared
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 调整R²</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(full.m)<span style="color:#f92672">$</span>adj.r.squared
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 剩余标准差</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">summary</span>(full.m)<span style="color:#f92672">$</span>sigma
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># AIC</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">AIC</span>(full.m)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">########################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q3: 使用上述模型，对剩余100个样本的BMI进行预测，</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     并计算预测值与真实值的相关系数</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 后100行数据</span>
+</span></span><span style="display:flex;"><span>data_100 <span style="color:#f92672">=</span> data[401<span style="color:#f92672">:</span><span style="color:#ae81ff">500</span>, ]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 去除数据不完整行</span>
+</span></span><span style="display:flex;"><span>data_100 <span style="color:#f92672">=</span> data_100<span style="color:#a6e22e">[complete.cases</span>(data_100),]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 根据模型预测</span>
+</span></span><span style="display:flex;"><span>predicted <span style="color:#f92672">=</span> <span style="color:#a6e22e">predict</span>(full.m, newdata <span style="color:#f92672">=</span> data_100, se.fit <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取预测的BMI</span>
+</span></span><span style="display:flex;"><span>predicted_bmi <span style="color:#f92672">=</span> predicted<span style="color:#f92672">$</span>fit
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取真实的bmi</span>
+</span></span><span style="display:flex;"><span>real_bmi <span style="color:#f92672">=</span> data_100<span style="color:#f92672">$</span>BMI
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 计算相关系数</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">cor</span>(predicted_bmi, real_bmi)
+</span></span></code></pre></div><h2 id="data">Data</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>	Hotelling&#39;s two sample T2-test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data:  data_sex1_b and data_sex2_b
+</span></span><span style="display:flex;"><span>T.2 = 28.519, df1 = 3, df2 = 453, p-value &lt; 2.2e-16
+</span></span><span style="display:flex;"><span>alternative hypothesis: true location difference is not equal to c(0,0,0)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>##########################################################################
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Start:  AIC=1333.57
+</span></span><span style="display:flex;"><span>BMI ~ sex + age + eth + act + b_Pb + b_Cd + b_Hg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       Df Sum of Sq   RSS    AIC
+</span></span><span style="display:flex;"><span>- age   1      4.91 13790 1331.7
+</span></span><span style="display:flex;"><span>- act   1      9.91 13795 1331.8
+</span></span><span style="display:flex;"><span>- sex   1     14.06 13799 1331.9
+</span></span><span style="display:flex;"><span>&lt;none&gt;              13785 1333.6
+</span></span><span style="display:flex;"><span>- b_Pb  1     95.88 13881 1334.1
+</span></span><span style="display:flex;"><span>- eth   1    115.83 13901 1334.6
+</span></span><span style="display:flex;"><span>- b_Hg  1    210.59 13996 1337.1
+</span></span><span style="display:flex;"><span>- b_Cd  1    565.07 14350 1346.1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Step:  AIC=1331.7
+</span></span><span style="display:flex;"><span>BMI ~ sex + eth + act + b_Pb + b_Cd + b_Hg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       Df Sum of Sq   RSS    AIC
+</span></span><span style="display:flex;"><span>- act   1      7.67 13798 1329.9
+</span></span><span style="display:flex;"><span>- sex   1     17.15 13807 1330.2
+</span></span><span style="display:flex;"><span>&lt;none&gt;              13790 1331.7
+</span></span><span style="display:flex;"><span>- b_Pb  1     95.65 13886 1332.2
+</span></span><span style="display:flex;"><span>- eth   1    119.96 13910 1332.8
+</span></span><span style="display:flex;"><span>+ age   1      4.91 13785 1333.6
+</span></span><span style="display:flex;"><span>- b_Hg  1    207.25 13997 1335.1
+</span></span><span style="display:flex;"><span>- b_Cd  1    579.82 14370 1344.6
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Step:  AIC=1329.9
+</span></span><span style="display:flex;"><span>BMI ~ sex + eth + b_Pb + b_Cd + b_Hg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       Df Sum of Sq   RSS    AIC
+</span></span><span style="display:flex;"><span>- sex   1     13.56 13811 1328.3
+</span></span><span style="display:flex;"><span>&lt;none&gt;              13798 1329.9
+</span></span><span style="display:flex;"><span>- b_Pb  1     98.30 13896 1330.5
+</span></span><span style="display:flex;"><span>- eth   1    122.49 13920 1331.1
+</span></span><span style="display:flex;"><span>+ act   1      7.67 13790 1331.7
+</span></span><span style="display:flex;"><span>+ age   1      2.66 13795 1331.8
+</span></span><span style="display:flex;"><span>- b_Hg  1    209.57 14007 1333.4
+</span></span><span style="display:flex;"><span>- b_Cd  1    573.32 14371 1342.6
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Step:  AIC=1328.26
+</span></span><span style="display:flex;"><span>BMI ~ eth + b_Pb + b_Cd + b_Hg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       Df Sum of Sq   RSS    AIC
+</span></span><span style="display:flex;"><span>&lt;none&gt;              13811 1328.3
+</span></span><span style="display:flex;"><span>- eth   1    118.98 13930 1329.4
+</span></span><span style="display:flex;"><span>+ sex   1     13.56 13798 1329.9
+</span></span><span style="display:flex;"><span>- b_Pb  1    147.58 13959 1330.1
+</span></span><span style="display:flex;"><span>+ age   1      5.31 13806 1330.1
+</span></span><span style="display:flex;"><span>+ act   1      4.07 13807 1330.2
+</span></span><span style="display:flex;"><span>- b_Hg  1    211.31 14023 1331.8
+</span></span><span style="display:flex;"><span>- b_Cd  1    562.88 14374 1340.7
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Call:
+</span></span><span style="display:flex;"><span>lm(formula = BMI ~ eth + b_Pb + b_Cd + b_Hg, data = data_400)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Coefficients:
+</span></span><span style="display:flex;"><span>(Intercept)          eth         b_Pb         b_Cd         b_Hg  
+</span></span><span style="display:flex;"><span>     26.427        0.562       -1.065       -1.678       -0.781  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>##########################################################################
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; # 提取R²
+</span></span><span style="display:flex;"><span>[1] 0.09002262
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; # 调整R²
+</span></span><span style="display:flex;"><span>[1] 0.07202872
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; # 剩余标准差
+</span></span><span style="display:flex;"><span>[1] 6.240287
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; # AIC
+</span></span><span style="display:flex;"><span>[1] 2362.885
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>##########################################################################
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; # 计算相关系数
+</span></span><span style="display:flex;"><span>[1] 0.1265127
+</span></span></code></pre></div><h2 id="result">Result</h2>
+<h3 id="a1">A1</h3>
+<ul>
+<li>因为p-value &lt; 2.2e-16，表明我们有足够的证据拒绝原假设，即不同性别人群在三种重金属浓度上存在显著差异。</li>
+<li>答: 不同性别人群在三种重金属浓度上存在显著差异。</li>
+</ul>
+<h3 id="a2">A2</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">最终模型的R²</th>
+<th style="text-align:center">调整R²</th>
+<th style="text-align:center">剩余标准差</th>
+<th style="text-align:center">AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0.09002262</td>
+<td style="text-align:center">0.07202872</td>
+<td style="text-align:center">6.240287</td>
+<td style="text-align:center">2362.885</td>
+</tr>
+</tbody>
+</table>
+<h3 id="a3">A3</h3>
+<ul>
+<li>预测值与真实值的相关系数为: 0.1265127</li>
+</ul>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#questions">Questions</a></li>
+    <li><a href="#codes">Codes</a></li>
+    <li><a href="#data">Data</a></li>
+    <li><a href="#result">Result</a>
+      <ul>
+        <li><a href="#a1">A1</a></li>
+        <li><a href="#a2">A2</a></li>
+        <li><a href="#a3">A3</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="/rlang/r_homework_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">R_homework_01&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2024 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>
