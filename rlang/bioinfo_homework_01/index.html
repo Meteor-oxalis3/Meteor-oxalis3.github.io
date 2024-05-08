@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bioinfo_Homework_01 // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Bioinfo_Homework_01" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/rlang/bioinfo_homework_01/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.125.6">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/hugo/">Hugo</a>
+                
+                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                
+                <a class="main-nav-link" href="/rlang/">Rlang</a>
+                
+                <a class="main-nav-link" href="/clang/">Clang</a>
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+                <a class="main-nav-link" href="/linux/">Linux</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Bioinfo_Homework_01</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/rlang/bioinfo_homework_01/" class="article-date">
+                <time datetime='2024-05-08T00:45:04.000&#43;08:00' itemprop="datePublished">2024-05-08</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="purposes">Purposes</h2>
+<h3 id="1-最大公约数计算">1. 最大公约数计算：</h3>
+<ul>
+<li>通过比较暴力枚举法和辗转相除法，探讨不同算法在计算最大公约数时的效率和适用性，从而了解算法选择对于特定问题的影响。</li>
+</ul>
+<h3 id="2-判断2的整数次幂">2. 判断2的整数次幂：</h3>
+<ul>
+<li>通过穷举法、递归法和转化为二进制比较法，比较不同判断方法的准确性和执行效率，进一步理解算法设计中的考虑因素。</li>
+</ul>
+<h3 id="3-寻找缺失的整数">3. 寻找缺失的整数：</h3>
+<ul>
+<li>利用排序找不连续、5050减去数组累加和和哈希表等方法，分析不同算法在解决类似问题上的优劣，探讨算法复杂度和数据结构选择对解决问题的影响。</li>
+</ul>
+<h2 id="codes">Codes</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>do<span style="color:#75715e"># Rstudio Server URL: http://202.195.187.9:8787/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 账号密码与Linux一致</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换R路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">.libPaths</span>(<span style="color:#e6db74">&#34;/home/biotools/anaconda3/envs/R4.3.1/lib/R/&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q1: 求出两个整数的最大公约数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A1.1: 暴力枚举法</span>
+</span></span><span style="display:flex;"><span>maxNum <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(x,y){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> x<span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>){ <span style="color:#75715e"># 取两个数之一, 从大到小遍历</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">%%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> y <span style="color:#f92672">%%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){ <span style="color:#75715e"># 如果发现第一个公约数, 即为最大公约数</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>(i)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">break</span> <span style="color:#75715e"># 随即跳出循环</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">maxNum</span>(<span style="color:#ae81ff">1000</span>,<span style="color:#ae81ff">64</span>) <span style="color:#75715e"># 输出为8</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">maxNum</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">100</span>) <span style="color:#75715e"># 输出为4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A1.2 辗转相除法(递归算法)</span>
+</span></span><span style="display:flex;"><span>zzxc <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(x,y){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (x<span style="color:#f92672">%%</span>y <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){ <span style="color:#75715e"># 如果恰好可以相互整除</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(y) <span style="color:#75715e"># 则直接返回被除数为两数的最大公约数</span>
+</span></span><span style="display:flex;"><span>  }<span style="color:#66d9ef">else</span>{ <span style="color:#75715e"># 如果不可以恰好整除</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(<span style="color:#a6e22e">zzxc</span>(y,x<span style="color:#f92672">%%</span>y)) <span style="color:#75715e"># 把被除数和余数再次代入函数</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">zzxc</span>(<span style="color:#ae81ff">1000</span>,<span style="color:#ae81ff">64</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">zzxc</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q2: 判断一个正整数是否是2的整数次幂</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A2.1: 穷举法</span>
+</span></span><span style="display:flex;"><span>power2_f1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(x){
+</span></span><span style="display:flex;"><span>  tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># 设置2的指数</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (tmp <span style="color:#f92672">&lt;=</span> x){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (tmp <span style="color:#f92672">==</span> x){ <span style="color:#75715e"># 如果找到与待判断数大小相同的2的整数次幂</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">TRUE</span>) <span style="color:#75715e"># 则返回TRUE</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    tmp <span style="color:#f92672">=</span> tmp<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#75715e"># 一直循环, 2^1, 2^2, 2^3...</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">FALSE</span>) <span style="color:#75715e"># 如果不找到, 则返回FALSE</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">power2_f1</span>(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">power2_f1</span>(<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A2.2: 递归法 (一直除)</span>
+</span></span><span style="display:flex;"><span>power2_f2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(x){
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) { <span style="color:#75715e"># 如果一直除下去, 结果为2, 则返回TRUE</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>) { <span style="color:#75715e"># 如果结果大于2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(<span style="color:#a6e22e">power2_f2</span>(x<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)) <span style="color:#75715e"># 再次除以2, 再次代入函数</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> { <span style="color:#75715e"># 如果不符合, 则返回FALSE</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">power2_f2</span>(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">power2_f2</span>(<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A2.3: 转化为二进制比较</span>
+</span></span><span style="display:flex;"><span>power2_f3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(x){
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 首先将x和x-1转化为二进制, 执行位运算AND操作</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 只有在两个输入序列中都为1时，结果序列的对应位置才为1，否则为0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 最后将上述位序列转换回整数形式, 并检查这个整数是否等于0</span>
+</span></span><span style="display:flex;"><span>  a <span style="color:#f92672">=</span> (<span style="color:#a6e22e">as.integer</span>( <span style="color:#a6e22e">intToBits</span>(x) <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">intToBits</span>(x<span style="color:#ae81ff">-1</span>) ) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(a)){ <span style="color:#75715e"># 遍历结果数组</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (a[i] <span style="color:#f92672">==</span> <span style="color:#66d9ef">FALSE</span>){ <span style="color:#75715e"># 只要发现有一个结果不是TRUE</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">FALSE</span>) <span style="color:#75715e"># 说明原数不是2的整数次幂</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">TRUE</span>) <span style="color:#75715e"># 如果结果全是TRUE, 则说明原数是2的整数次幂</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">power2_f3</span>(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">power2_f3</span>(<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q3: 寻找缺失的整数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 在一个无序数组中有99个正整数，范围是1--100，唯独缺少其中的1个整数。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如何找出这个缺失的整数？</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 随机选取99个数构成array (从1到100里面取)</span>
+</span></span><span style="display:flex;"><span>array <span style="color:#f92672">=</span> <span style="color:#a6e22e">sample</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">99</span>, replace <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A3.1: 排序找不连续</span>
+</span></span><span style="display:flex;"><span>findInt_f1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array){
+</span></span><span style="display:flex;"><span>  sorted_array <span style="color:#f92672">=</span> <span style="color:#a6e22e">sort</span>(array) <span style="color:#75715e"># 数组排序</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">98</span>){ <span style="color:#75715e"># 遍历排序后的数组</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (sorted_array[i<span style="color:#ae81ff">+1</span>]<span style="color:#f92672">-</span>sorted_array[i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>){
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 如果右边的数减去左边的数不是1, 则返回左边的数加1为缺失的整数</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>(sorted_array[i]<span style="color:#ae81ff">+1</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (由于array为随机选取, 每次重新运行上面的sample()会导致结果不同)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">findInt_f1</span>(array)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A3.2: 5050减去array的累加和</span>
+</span></span><span style="display:flex;"><span>findInt_f2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array){
+</span></span><span style="display:flex;"><span>  array_sum <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(array) <span style="color:#75715e"># 求array的和</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(<span style="color:#ae81ff">5050</span><span style="color:#f92672">-</span>array_sum) <span style="color:#75715e"># 返回值: 5050减去array的和则为缺失的整数</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (由于array为随机选取, 每次重新运行上面的sample()会导致结果不同)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">findInt_f2</span>(array)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A3.3: 哈希表</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 服务器已安装hash包</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># install.packages(&#34;hash&#34;)</span>
+</span></span><span style="display:flex;"><span>findInt_f3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">library</span>(hash) <span style="color:#75715e"># 引入hash包</span>
+</span></span><span style="display:flex;"><span>  h <span style="color:#f92672">=</span> <span style="color:#a6e22e">hash</span>() <span style="color:#75715e"># 创建一个哈希表</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">100</span>){ <span style="color:#75715e"># 添加键值对</span>
+</span></span><span style="display:flex;"><span>    h[<span style="color:#a6e22e">[as.character</span>(i)]] <span style="color:#f92672">=</span> i <span style="color:#75715e">#键值必须为字符类型</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">99</span>){ <span style="color:#75715e"># 删除哈希表里面含有array对应的键值对</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">del</span>(<span style="color:#a6e22e">as.character</span>(array[j]),h)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">keys</span>(h) <span style="color:#75715e"># 剩下的最后一个键值就是缺失的数字</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (由于array为随机选取, 每次重新运行上面的sample()会导致结果不同)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">findInt_f3</span>(array)
+</span></span></code></pre></div><h2 id="results">Results</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##########################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q1: 求出两个整数的最大公约数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##########################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A1.1: 暴力枚举法</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">maxNum</span>(<span style="color:#ae81ff">1000</span>,<span style="color:#ae81ff">64</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">maxNum</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A1.2 辗转相除法(递归算法)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">zzxc</span>(<span style="color:#ae81ff">1000</span>,<span style="color:#ae81ff">64</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">zzxc</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q2: 判断一个正整数是否是2的整数次幂</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A2.1: 穷举法</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">power2_f1</span>(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#66d9ef">TRUE</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">power2_f1</span>(<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#66d9ef">FALSE</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A2.2: 递归法 (一直除)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">power2_f2</span>(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#66d9ef">TRUE</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">power2_f2</span>(<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#66d9ef">FALSE</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A2.3: 转化为二进制比较</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">power2_f3</span>(<span style="color:#ae81ff">1024</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#66d9ef">TRUE</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">power2_f3</span>(<span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#66d9ef">FALSE</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q3: 寻找缺失的整数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#75715e"># (由于array为随机选取, 每次重新运行上面的sample()会导致结果不同)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">findInt_f1</span>(array)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">37</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#75715e"># (由于array为随机选取, 每次重新运行上面的sample()会导致结果不同)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">findInt_f2</span>(array)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">37</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#75715e"># (由于array为随机选取, 每次重新运行上面的sample()会导致结果不同)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">findInt_f3</span>(array)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#e6db74">&#34;37&#34;</span>
+</span></span></code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#purposes">Purposes</a>
+      <ul>
+        <li><a href="#1-最大公约数计算">1. 最大公约数计算：</a></li>
+        <li><a href="#2-判断2的整数次幂">2. 判断2的整数次幂：</a></li>
+        <li><a href="#3-寻找缺失的整数">3. 寻找缺失的整数：</a></li>
+      </ul>
+    </li>
+    <li><a href="#codes">Codes</a></li>
+    <li><a href="#results">Results</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="/rlang/r_homework_02/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">R_homework_02&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2024 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>
