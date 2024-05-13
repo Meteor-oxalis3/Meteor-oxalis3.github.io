@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bioinfo_Homework_02 // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Bioinfo_Homework_02" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/rlang/bioinfo_homework_02/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.125.7">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/hugo/">Hugo</a>
+                
+                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                
+                <a class="main-nav-link" href="/rlang/">Rlang</a>
+                
+                <a class="main-nav-link" href="/clang/">Clang</a>
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+                <a class="main-nav-link" href="/linux/">Linux</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Bioinfo_Homework_02</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/rlang/bioinfo_homework_02/" class="article-date">
+                <time datetime='2024-05-13T19:06:16.000&#43;08:00' itemprop="datePublished">2024-05-13</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="purposes">Purposes</h2>
+<ul>
+<li>无序整型数组，求出该数组排序后的任意两个相邻元素的最大差值</li>
+</ul>
+<h2 id="codes">Codes</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Q: 有一个无序整型数组，如何求出该数组排序后的任意两个相邻元素的最大差值？</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    要求时间和空间复杂度尽可能低。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A1: 使用任意一种排序算法，给原数组排序，然后遍历排好序的数组，</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     并对两个相邻元素求差，最终得到最大差值。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>array <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">9</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 计算差值</span>
+</span></span><span style="display:flex;"><span>sort2Find <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(fun,array){
+</span></span><span style="display:flex;"><span>  sorted_array <span style="color:#f92672">=</span> <span style="color:#a6e22e">fun</span>(array) <span style="color:#75715e"># 替换成别的排序方法</span>
+</span></span><span style="display:flex;"><span>  temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 初始化差值计数器</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>(<span style="color:#a6e22e">length</span>(array)<span style="color:#ae81ff">-1</span>)){ <span style="color:#75715e"># 遍历数组</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (temp <span style="color:#f92672">&lt;</span> (sorted_array[i<span style="color:#ae81ff">+1</span>]<span style="color:#f92672">-</span>sorted_array[i])){
+</span></span><span style="display:flex;"><span>      temp <span style="color:#f92672">=</span> sorted_array[i<span style="color:#ae81ff">+1</span>]<span style="color:#f92672">-</span>sorted_array[i] <span style="color:#75715e"># 如果找到更大的差值，则覆盖</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(temp)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A1.1 冒泡排序</span>
+</span></span><span style="display:flex;"><span>bubble <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array){
+</span></span><span style="display:flex;"><span>  n <span style="color:#f92672">=</span> <span style="color:#a6e22e">length</span>(array) <span style="color:#75715e"># 数组长度</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>(n<span style="color:#ae81ff">-1</span>)){ <span style="color:#75715e"># 注意要减去1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>(n<span style="color:#f92672">-</span>i)){ <span style="color:#75715e"># 内循环</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (array[j<span style="color:#ae81ff">+1</span>] <span style="color:#f92672">&lt;</span> array[j]){ <span style="color:#75715e"># 如果右边的比左边的大</span>
+</span></span><span style="display:flex;"><span>        temp <span style="color:#f92672">=</span> array[j<span style="color:#ae81ff">+1</span>] <span style="color:#75715e"># 左右互换</span>
+</span></span><span style="display:flex;"><span>        array[j<span style="color:#ae81ff">+1</span>] <span style="color:#f92672">=</span> array[j]
+</span></span><span style="display:flex;"><span>        array[j] <span style="color:#f92672">=</span> temp
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(array)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A1.2 选择排序</span>
+</span></span><span style="display:flex;"><span>select <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array){
+</span></span><span style="display:flex;"><span>  n <span style="color:#f92672">=</span> <span style="color:#a6e22e">length</span>(array) <span style="color:#75715e"># 数组长度</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>(n<span style="color:#ae81ff">-1</span>)){ <span style="color:#75715e"># 外层循环遍历数组</span>
+</span></span><span style="display:flex;"><span>    k <span style="color:#f92672">=</span> i
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (j <span style="color:#66d9ef">in</span> (i<span style="color:#ae81ff">+1</span>)<span style="color:#f92672">:</span>n){ <span style="color:#75715e"># 内层循环遍历选择元素之后的数组</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (array[j] <span style="color:#f92672">&lt;</span> array[k]){ <span style="color:#75715e"># 如果小于选择的元素</span>
+</span></span><span style="display:flex;"><span>        k <span style="color:#f92672">=</span> j <span style="color:#75715e"># 覆盖k</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    temp <span style="color:#f92672">=</span> array[i] <span style="color:#75715e"># 互换数组下标为i和k的元素</span>
+</span></span><span style="display:flex;"><span>    array[i] <span style="color:#f92672">=</span> array[k]
+</span></span><span style="display:flex;"><span>    array[k] <span style="color:#f92672">=</span> temp
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(array)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A1.3 插入排序</span>
+</span></span><span style="display:flex;"><span>insert <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array){
+</span></span><span style="display:flex;"><span>  n <span style="color:#f92672">=</span> <span style="color:#a6e22e">length</span>(array) <span style="color:#75715e"># 数组长度</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span>n){ <span style="color:#75715e"># 第一待排序序列第一个元素看做一个有序序列</span>
+</span></span><span style="display:flex;"><span>    base <span style="color:#f92672">=</span> array[i] <span style="color:#75715e"># 第二个元素到最后一个元素当成是未排序序列</span>
+</span></span><span style="display:flex;"><span>    j <span style="color:#f92672">=</span> i<span style="color:#ae81ff">-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(j<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> array[j] <span style="color:#f92672">&gt;</span> base){
+</span></span><span style="display:flex;"><span>      array[j<span style="color:#ae81ff">+1</span>] <span style="color:#f92672">=</span> array[j]
+</span></span><span style="display:flex;"><span>      j <span style="color:#f92672">=</span> j<span style="color:#ae81ff">-1</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    array[j<span style="color:#ae81ff">+1</span>] <span style="color:#f92672">=</span> base
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(array)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A1.4 快速排序</span>
+</span></span><span style="display:flex;"><span>quick <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array) {
+</span></span><span style="display:flex;"><span>  n <span style="color:#f92672">=</span> <span style="color:#a6e22e">length</span>(array) <span style="color:#75715e"># 获取数组长度</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(array) <span style="color:#75715e"># 如果数组长度小于等于1, 则返回整个数组</span>
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    pivot <span style="color:#f92672">=</span> array[1] <span style="color:#75715e"># 取第一个元素为枢轴元素</span>
+</span></span><span style="display:flex;"><span>    smaller <span style="color:#f92672">=</span> array[array <span style="color:#f92672">&lt;</span> pivot] <span style="color:#75715e"># 比枢轴小的元素为一个数组</span>
+</span></span><span style="display:flex;"><span>    equal <span style="color:#f92672">=</span> array[array <span style="color:#f92672">==</span> pivot] <span style="color:#75715e"># 和枢轴一样大的元素为一个数组</span>
+</span></span><span style="display:flex;"><span>    larger <span style="color:#f92672">=</span> array[array <span style="color:#f92672">&gt;</span> pivot] <span style="color:#75715e"># 比枢轴大的元素为一个数组</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">quick</span>(smaller), equal, <span style="color:#a6e22e">quick</span>(larger))) <span style="color:#75715e"># 递归</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort2Find</span>(insert, array) <span style="color:#75715e"># 使用插入排序</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort2Find</span>(select, array) <span style="color:#75715e"># 使用选择排序</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort2Find</span>(bubble, array) <span style="color:#75715e"># 使用冒泡排序</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sort2Find</span>(quick, array) <span style="color:#75715e"># 使用快速排序</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################################################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A2 计数排序</span>
+</span></span><span style="display:flex;"><span>array <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>countFind <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array){
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 最大最小取差值</span>
+</span></span><span style="display:flex;"><span>  max <span style="color:#f92672">=</span> <span style="color:#a6e22e">max</span>(array)
+</span></span><span style="display:flex;"><span>  min <span style="color:#f92672">=</span> <span style="color:#a6e22e">min</span>(array)
+</span></span><span style="display:flex;"><span>  minus <span style="color:#f92672">=</span> max<span style="color:#f92672">-</span>min<span style="color:#ae81ff">+1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 创建新数组</span>
+</span></span><span style="display:flex;"><span>  nums <span style="color:#f92672">=</span> <span style="color:#a6e22e">array</span>(<span style="color:#ae81ff">0</span>,<span style="color:#a6e22e">c</span>(minus))
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 遍历原数组array, 统计个数</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (num <span style="color:#66d9ef">in</span> array){
+</span></span><span style="display:flex;"><span>    nums[num<span style="color:#f92672">-</span>min<span style="color:#ae81ff">+1</span>] <span style="color:#f92672">=</span> nums[num<span style="color:#f92672">-</span>min<span style="color:#ae81ff">+1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 统计连续最多的0的个数</span>
+</span></span><span style="display:flex;"><span>  temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  count0_max <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (num <span style="color:#66d9ef">in</span> nums){ <span style="color:#75715e"># 遍历新数组</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (num <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){ <span style="color:#75715e"># 如果遇到0, 计数器temp加1</span>
+</span></span><span style="display:flex;"><span>      temp <span style="color:#f92672">=</span> temp <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (num <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 遇到不是0, 判断本轮统计的连续0个数是否是最大</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (count0_max <span style="color:#f92672">&lt;</span> temp){
+</span></span><span style="display:flex;"><span>        count0_max <span style="color:#f92672">=</span> temp <span style="color:#75715e"># 如果比之前的大则覆盖</span>
+</span></span><span style="display:flex;"><span>        temp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># 重新计数， 计数器清零</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 返回最大的差值</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(count0_max <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">countFind</span>(array)
+</span></span></code></pre></div><h2 id="results">Results</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>array <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">9</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">sort2Find</span>(insert, array) <span style="color:#75715e"># 使用插入排序</span>
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">sort2Find</span>(select, array) <span style="color:#75715e"># 使用选择排序</span>
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">sort2Find</span>(bubble, array) <span style="color:#75715e"># 使用冒泡排序</span>
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">sort2Find</span>(quick, array) <span style="color:#75715e"># 使用快速排序</span>
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> array <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">countFind</span>(array) <span style="color:#75715e"># 使用计数排序</span>
+</span></span><span style="display:flex;"><span>[1] <span style="color:#ae81ff">5</span>
+</span></span></code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#purposes">Purposes</a></li>
+    <li><a href="#codes">Codes</a></li>
+    <li><a href="#results">Results</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="/rlang/bioinfo_homework_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Bioinfo_Homework_01&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2024 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

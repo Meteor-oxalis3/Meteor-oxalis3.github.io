@@ -6,8 +6,15 @@
     <description>Recent content in Rlangs on Meteor03&#39;s Oxalis Garden</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 08 May 2024 00:45:04 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 May 2024 19:06:16 +0800</lastBuildDate>
     <atom:link href="https://meteor-oxalis3.github.io/rlang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bioinfo_Homework_02</title>
+      <link>https://meteor-oxalis3.github.io/rlang/bioinfo_homework_02/</link>
+      <pubDate>Mon, 13 May 2024 19:06:16 +0800</pubDate>
+      <guid>https://meteor-oxalis3.github.io/rlang/bioinfo_homework_02/</guid>
+      <description>Purposes 无序整型数组，求出该数组排序后的任意两个相邻元素的最大差值 Codes # Q: 有一个无序整型数组，如何求出该数组排序后的任意两个相邻元素的最大差值？ # 要求时间和空间复杂度尽可能低。 # A1: 使用任意一种排序算法，给原数组排序，然后遍历排好序的数组， # 并对两个相邻元素求差，最终得到最大差值。 array = c(2,6,3,4,5,10,9) # 计算差值 sort2Find = function(fun,array){ sorted_array = fun(array) # 替换成别的排序方法 temp = 0 # 初始化差值计数器 for (i in 1:(length(array)-1)){ # 遍历数组 if (temp &amp;lt; (sorted_array[i+1]-sorted_array[i])){ temp = sorted_array[i+1]-sorted_array[i] # 如果找到更大的差值，则覆盖 } } return(temp) } # A1.</description>
+    </item>
     <item>
       <title>Bioinfo_Homework_01</title>
       <link>https://meteor-oxalis3.github.io/rlang/bioinfo_homework_01/</link>
