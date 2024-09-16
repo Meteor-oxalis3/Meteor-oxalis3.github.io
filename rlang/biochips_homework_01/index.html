@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BioChips_homework_01 // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="BioChips_homework_01" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/rlang/biochips_homework_01/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.111.3">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/hugo/">Hugo</a>
+                
+                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                
+                <a class="main-nav-link" href="/rlang/">Rlang</a>
+                
+                <a class="main-nav-link" href="/clang/">Clang</a>
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+                <a class="main-nav-link" href="/linux/">Linux</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">BioChips_homework_01</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/rlang/biochips_homework_01/" class="article-date">
+                <time datetime='2024-09-11T19:05:48.000&#43;08:00' itemprop="datePublished">2024-09-11</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="affy-包处理-affymetrix-表达谱芯片">Affy 包处理 affymetrix 表达谱芯片</h1>
+<h2 id="questions">Questions</h2>
+<ol>
+<li>
+<p>从Gene Expression Omnibus (GEO) 查询GSE65496，并下载GSE65496_family.soft和原始数据(.cel格式)</p>
+</li>
+<li>
+<p>仔细研读soft格式文件</p>
+</li>
+<li>
+<p>试着用Bioconductor的affy包下函数处理.cel文件 (可以网页搜索，或者上Bioconductor官网查询)，得到探针表达值</p>
+</li>
+<li>
+<p>下载该数据对应的平台数据，通过文本处理，将探针和gene symbol对应，得到gene symbol的表达值</p>
+</li>
+<li>
+<p>对表达谱数据做质量分析（质控）：①灰度图；②RNA降解分析</p>
+</li>
+<li>
+<p>对芯片数据做如下分析：①Mas5或rma方法进行背景校正，标准化（归一化）；②提取表达值</p>
+</li>
+</ol>
+<h2 id="codes">Codes</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># Rstudio Server URL: http://202.195.187.9:8787/</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 账号密码与Linux一致</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换R路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">.libPaths</span>(<span style="color:#e6db74">&#34;/home/biotools/anaconda3/envs/R4.3.1/lib/R/&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 工作路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setwd</span>(dir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/public/workspace/stu22230111/12_R/01_BioChips/Homework_01/&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 加载R包 (Biotools下已安装好相关R包，无需重复安装)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(<span style="color:#e6db74">&#34;affy&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(<span style="color:#e6db74">&#34;GEOquery&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">###################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 问题1：下载GSE65496_family.soft和cel原始数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (虽然直接使用R包GEOquery比较方便，但下载速度比较慢，还是建议使用wget手动下载)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 下载soft文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># wget &#34;https://ftp.ncbi.nlm.nih.gov/geo/series/GSE65nnn/GSE65496/soft/GSE65496_family.soft.gz&#34; -O &#34;GSE65496.soft.gz&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getGEOfile</span>(<span style="color:#e6db74">&#34;GSE65496&#34;</span>, destdir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./RAW/&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 下载cel原始数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># wget &#34;https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE65496&amp;format=file&#34; -O &#34;GSE65496_RAW.tar&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">getGEOSuppFiles</span>(<span style="color:#e6db74">&#34;GSE65496&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 解包cel原始数据</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">untar</span>(<span style="color:#e6db74">&#34;./GSE65496/GSE65496_RAW.tar&#34;</span>, exdir <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./Data/&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">###################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 问题2：研读soft文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># NCBI官方文档：https://www.ncbi.nlm.nih.gov/geo/info/soft.html</span>
+</span></span><span style="display:flex;"><span>soft_file <span style="color:#f92672">=</span> <span style="color:#a6e22e">getGEO</span>(filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./RAW/GSE65496.soft.gz&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">###################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 问题3：用affy包处理.cel文件，得到探针表达值</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 读取CEL文件</span>
+</span></span><span style="display:flex;"><span>cel_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;./Data/&#34;</span>
+</span></span><span style="display:flex;"><span>cel_data <span style="color:#f92672">=</span> <span style="color:#a6e22e">ReadAffy</span>(celfile.path <span style="color:#f92672">=</span> cel_path)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 画灰度图</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># pdf记录矢量信息，保存和打开时很慢，需耐心等待一会儿</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或者使用png (png(&#34;result.png&#34;, weight = 1920, height = 1080))</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">pdf</span>(<span style="color:#e6db74">&#34;result.pdf&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 两个一行，一共四行</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">par</span>(mfrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">8</span>){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">image</span>(cel_data[,i])
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dev.off</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># RNA降解分析</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用 RColorBrewer 中的调色板生成高对比度颜色</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(RColorBrewer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>colors <span style="color:#f92672">=</span> <span style="color:#a6e22e">brewer.pal</span>(n <span style="color:#f92672">=</span> <span style="color:#a6e22e">length</span>(<span style="color:#a6e22e">sampleNames</span>(cel_data)), name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Dark2&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">pdf</span>(<span style="color:#e6db74">&#34;degradation.pdf&#34;</span>, width <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, height <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>RNAdeg <span style="color:#f92672">=</span> <span style="color:#a6e22e">AffyRNAdeg</span>(cel_data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">plotAffyRNAdeg</span>(RNAdeg, cols <span style="color:#f92672">=</span> colors)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;topleft&#34;</span>,
+</span></span><span style="display:flex;"><span>       <span style="color:#a6e22e">sampleNames</span>(cel_data), 
+</span></span><span style="display:flex;"><span>       col <span style="color:#f92672">=</span> colors, 
+</span></span><span style="display:flex;"><span>       lwd<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, 
+</span></span><span style="display:flex;"><span>       inset <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>,
+</span></span><span style="display:flex;"><span>       cex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dev.off</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># rma与mas5方法进行背景校正，标准化（归一化），得到探针表达值</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Bug: 需重新编译安装一下preprocessCore，否则无法使用rma</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 解决方法来源：https://github.com/Bioconductor/bioconductor_docker/issues/22</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># BiocManager::install(&#34;preprocessCore&#34;, configure.args = c(preprocessCore = &#34;--disable-threading&#34;), force= TRUE, update=TRUE, type = &#34;source&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 记得重新打开R/Rstudio哦</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这里我在 biotools 下的R里面已经重新编译安装好了</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>eset_rma <span style="color:#f92672">=</span> <span style="color:#a6e22e">rma</span>(cel_data)
+</span></span><span style="display:flex;"><span>eset_mas5 <span style="color:#f92672">=</span> <span style="color:#a6e22e">mas5</span>(cel_data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取表达值 (两种算法)</span>
+</span></span><span style="display:flex;"><span>expr_rma <span style="color:#f92672">=</span> <span style="color:#a6e22e">exprs</span>(eset_rma)
+</span></span><span style="display:flex;"><span>expr_mas5 <span style="color:#f92672">=</span> <span style="color:#a6e22e">exprs</span>(eset_mas5)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 保存表达值 (两种算法)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">write.csv</span>(expr_mas5, file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;expr_mas5.csv&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">write.csv</span>(expr_rma, file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;expr_rma.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##################################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## 问题4：将探针和gene symbol对应，得到gene symbol的表达值</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 下载对应的平台数据(GPL570)</span>
+</span></span><span style="display:flex;"><span>platform_data <span style="color:#f92672">=</span> <span style="color:#a6e22e">getGEO</span>(<span style="color:#e6db74">&#34;GPL570&#34;</span>,destdir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./RAW/&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 载入dplyr</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(<span style="color:#e6db74">&#34;dplyr&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## rma算法</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取ID与Gene Symbol的对应表格</span>
+</span></span><span style="display:flex;"><span>gene_symbol_ID <span style="color:#f92672">=</span> <span style="color:#a6e22e">Table</span>(platform_data)<span style="color:#a6e22e">[c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">11</span>)]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 按照ID添加对应的Gene Symbol</span>
+</span></span><span style="display:flex;"><span>expr_rma <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.data.frame</span>(expr_rma)
+</span></span><span style="display:flex;"><span>expr_rma<span style="color:#f92672">$</span>ID <span style="color:#f92672">=</span> <span style="color:#a6e22e">rownames</span>(expr_rma)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 内连接</span>
+</span></span><span style="display:flex;"><span>processed_rma <span style="color:#f92672">=</span> <span style="color:#a6e22e">inner_join</span>(gene_symbol_ID, expr_rma, by<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ID&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 去除ID列</span>
+</span></span><span style="display:flex;"><span>processed_rma <span style="color:#f92672">=</span> processed_rma[,<span style="color:#ae81ff">-1</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">write.table</span>(processed_rma,<span style="color:#e6db74">&#34;GeneSymbol_rma.csv&#34;</span>,sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;,&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## mas5算法</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取ID与Gene Symbol的对应表格</span>
+</span></span><span style="display:flex;"><span>gene_symbol_ID <span style="color:#f92672">=</span> <span style="color:#a6e22e">Table</span>(platform_data)<span style="color:#a6e22e">[c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">11</span>)]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 按照ID添加对应的Gene Symbol</span>
+</span></span><span style="display:flex;"><span>expr_mas5 <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.data.frame</span>(expr_mas5)
+</span></span><span style="display:flex;"><span>expr_mas5<span style="color:#f92672">$</span>ID <span style="color:#f92672">=</span> <span style="color:#a6e22e">rownames</span>(expr_mas5)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 内连接</span>
+</span></span><span style="display:flex;"><span>processed_mas5 <span style="color:#f92672">=</span> <span style="color:#a6e22e">inner_join</span>(gene_symbol_ID, expr_mas5, by<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ID&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 去除ID列</span>
+</span></span><span style="display:flex;"><span>processed_mas5 <span style="color:#f92672">=</span> processed_mas5[,<span style="color:#ae81ff">-1</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">write.table</span>(processed_mas5,<span style="color:#e6db74">&#34;GeneSymbol_mas5.csv&#34;</span>,sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;,&#34;</span>)
+</span></span></code></pre></div><h2 id="results">Results</h2>
+<ul>
+<li>Rstudio Server 运行界面</li>
+</ul>
+<p><img src="/images/affy_rstudio_server.png" alt=""></p>
+<ul>
+<li>研读SOFT文件</li>
+</ul>
+<p><img src="/images/soft_file1.png" alt="soft_file1"></p>
+<p><img src="/images/soft_file2.png" alt="soft_file2"></p>
+<hr>
+<ul>
+<li>灰度图</li>
+</ul>
+<p><img src="/images/gray_scale.png" alt="gray_scale"></p>
+<hr>
+<ul>
+<li>RNA降解</li>
+</ul>
+<p><img src="/images/degradation.png" alt="degradation"></p>
+<hr>
+<ul>
+<li>表达值（RMA算法）</li>
+</ul>
+<p><img src="/images/expr_rma.png" alt="expr_rma"></p>
+<ul>
+<li>表达值（MAS5算法）</li>
+</ul>
+<p><img src="/images/expr_mas5.png" alt="expr_mas5"></p>
+<hr>
+<ul>
+<li>Gene Symbol表达值（RMA算法）</li>
+</ul>
+<p><img src="/images/symbol_rma.png" alt="symbol_rma"></p>
+<ul>
+<li>Gene Symbol表达值（MAS5算法）</li>
+</ul>
+<p><img src="/images/symbol_mas5.png" alt="symbol_mas5"></p>
+<h2 id="files">Files</h2>
+<ul>
+<li>RMA结果文件下载</li>
+</ul>
+<p><a href="https://bucket.meteor-oxalis3.com/BioChips/GeneSymbol_rma.csv">📄 GeneSymbol_rma.csv</a></p>
+<ul>
+<li>MAS5结果文件下载</li>
+</ul>
+<p><a href="https://bucket.meteor-oxalis3.com/BioChips/GeneSymbol_mas5.csv">📄 GeneSymbol_mas5.csv</a></p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#questions">Questions</a></li>
+    <li><a href="#codes">Codes</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#files">Files</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="/rlang/r_homework_03/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">R_homework_03&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2024 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

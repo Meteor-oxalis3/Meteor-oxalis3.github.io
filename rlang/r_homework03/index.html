@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
     
 
-    <meta name="generator" content="Hugo 0.126.1">
+    <meta name="generator" content="Hugo 0.111.3">
 </head>
 
 
@@ -83,7 +83,7 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>data <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.csv</span>(<span style="color:#e6db74">&#34;dat1.csv&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 写个求可信区间的函数</span>
-</span></span><span style="display:flex;"><span>CI <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">function</span>(sex, what, a) {
+</span></span><span style="display:flex;"><span>CI <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(sex, what, a) {
 </span></span><span style="display:flex;"><span>  x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">subset</span>(data, Gender <span style="color:#f92672">==</span> sex) <span style="color:#75715e"># 按性别筛选</span>
 </span></span><span style="display:flex;"><span>  x_what <span style="color:#f92672">&lt;-</span> x[[what]] <span style="color:#75715e"># 按列名提取</span>
 </span></span><span style="display:flex;"><span>  n <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nrow</span>(x) <span style="color:#75715e"># 计算各自人数</span>
@@ -100,12 +100,12 @@
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 写个求平均BMI的函数</span>
-</span></span><span style="display:flex;"><span>mean_BMI <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">function</span>(sex <span style="color:#f92672">=</span> <span style="color:#66d9ef">NULL</span>) {
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">is.null</span>(sex)) {
+</span></span><span style="display:flex;"><span>mean_BMI <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(sex <span style="color:#f92672">=</span> <span style="color:#66d9ef">NULL</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">is.null</span>(sex)) {
 </span></span><span style="display:flex;"><span>    x_BMI <span style="color:#f92672">&lt;-</span> data[[<span style="color:#e6db74">&#34;BMI&#34;</span>]] <span style="color:#75715e"># 所有人的BMI数据</span>
 </span></span><span style="display:flex;"><span>    x_bar <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(x_BMI, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#75715e"># 所有人的BMI均值</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;整体 BMI 的均值为:&#34;</span>, x_bar, <span style="color:#e6db74">&#34;\n&#34;</span>) <span style="color:#75715e"># 打印整体BMI均值</span>
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>  } else {
 </span></span><span style="display:flex;"><span>    x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">subset</span>(data, Gender <span style="color:#f92672">==</span> sex) <span style="color:#75715e"># 根据性别筛选</span>
 </span></span><span style="display:flex;"><span>    x_BMI <span style="color:#f92672">&lt;-</span> x[[<span style="color:#e6db74">&#34;BMI&#34;</span>]] <span style="color:#75715e"># 按列名提取</span>
 </span></span><span style="display:flex;"><span>    x_bar <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(x_BMI, na.rm <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>) <span style="color:#75715e"># 各自均值</span>
@@ -155,9 +155,9 @@
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;2. 现用两种测量肺活量的仪器对12名妇女测得最大呼气率(PEER)(L/min),
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   资料如下表，问两种方法的检测结果有无差别?\n\n&#34;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (p_value <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.05</span>) {
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">if </span>(p_value <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.05</span>) {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;p值为&#34;</span>, p_value, <span style="color:#e6db74">&#34;,&#34;</span>, <span style="color:#e6db74">&#34;大于显著性水平，说明两种方法的检测结果无显著差别&#34;</span>)
-</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>} else {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cat</span>(<span style="color:#e6db74">&#34;p值为&#34;</span>, p_value, <span style="color:#e6db74">&#34;,&#34;</span>, <span style="color:#e6db74">&#34;小于显著性水平，说明两种方法的检测结果有显著差别&#34;</span>)
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>

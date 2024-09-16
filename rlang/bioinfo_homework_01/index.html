@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
     
 
-    <meta name="generator" content="Hugo 0.126.1">
+    <meta name="generator" content="Hugo 0.111.3">
 </head>
 
 
@@ -99,11 +99,11 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Q1: 求出两个整数的最大公约数</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">## A1.1: 暴力枚举法</span>
-</span></span><span style="display:flex;"><span>maxNum <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(x,y){
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> x<span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>){ <span style="color:#75715e"># 取两个数之一, 从大到小遍历</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">%%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> y <span style="color:#f92672">%%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){ <span style="color:#75715e"># 如果发现第一个公约数, 即为最大公约数</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>(i)
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">break</span> <span style="color:#75715e"># 随即跳出循环</span>
+</span></span><span style="display:flex;"><span>maxNum <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(x,y){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for </span>(i in x<span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>){ <span style="color:#75715e"># 取两个数之一, 从大到小遍历</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if </span>(x <span style="color:#f92672">%%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> y <span style="color:#f92672">%%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){ <span style="color:#75715e"># 如果发现第一个公约数, 即为最大公约数</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">return</span>(i)
+</span></span><span style="display:flex;"><span>      break <span style="color:#75715e"># 随即跳出循环</span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
@@ -114,11 +114,11 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">## A1.2 辗转相除法(递归算法)</span>
-</span></span><span style="display:flex;"><span>zzxc <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(x,y){
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (x<span style="color:#f92672">%%</span>y <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){ <span style="color:#75715e"># 如果恰好可以相互整除</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(y) <span style="color:#75715e"># 则直接返回被除数为两数的最大公约数</span>
-</span></span><span style="display:flex;"><span>  }<span style="color:#66d9ef">else</span>{ <span style="color:#75715e"># 如果不可以恰好整除</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(<span style="color:#a6e22e">zzxc</span>(y,x<span style="color:#f92672">%%</span>y)) <span style="color:#75715e"># 把被除数和余数再次代入函数</span>
+</span></span><span style="display:flex;"><span>zzxc <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(x,y){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if </span>(x<span style="color:#f92672">%%</span>y <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){ <span style="color:#75715e"># 如果恰好可以相互整除</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">return</span>(y) <span style="color:#75715e"># 则直接返回被除数为两数的最大公约数</span>
+</span></span><span style="display:flex;"><span>  }else{ <span style="color:#75715e"># 如果不可以恰好整除</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">return</span>(<span style="color:#a6e22e">zzxc</span>(y,x<span style="color:#f92672">%%</span>y)) <span style="color:#75715e"># 把被除数和余数再次代入函数</span>
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -130,15 +130,15 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Q2: 判断一个正整数是否是2的整数次幂</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">## A2.1: 穷举法</span>
-</span></span><span style="display:flex;"><span>power2_f1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(x){
+</span></span><span style="display:flex;"><span>power2_f1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(x){
 </span></span><span style="display:flex;"><span>  tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># 设置2的指数</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (tmp <span style="color:#f92672">&lt;=</span> x){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (tmp <span style="color:#f92672">==</span> x){ <span style="color:#75715e"># 如果找到与待判断数大小相同的2的整数次幂</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">TRUE</span>) <span style="color:#75715e"># 则返回TRUE</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">while </span>(tmp <span style="color:#f92672">&lt;=</span> x){
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if </span>(tmp <span style="color:#f92672">==</span> x){ <span style="color:#75715e"># 如果找到与待判断数大小相同的2的整数次幂</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">return</span>(<span style="color:#66d9ef">TRUE</span>) <span style="color:#75715e"># 则返回TRUE</span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    tmp <span style="color:#f92672">=</span> tmp<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#75715e"># 一直循环, 2^1, 2^2, 2^3...</span>
 </span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">FALSE</span>) <span style="color:#75715e"># 如果不找到, 则返回FALSE</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(<span style="color:#66d9ef">FALSE</span>) <span style="color:#75715e"># 如果不找到, 则返回FALSE</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
@@ -147,13 +147,13 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">## A2.2: 递归法 (一直除)</span>
-</span></span><span style="display:flex;"><span>power2_f2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(x){
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) { <span style="color:#75715e"># 如果一直除下去, 结果为2, 则返回TRUE</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">TRUE</span>)
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>) { <span style="color:#75715e"># 如果结果大于2</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(<span style="color:#a6e22e">power2_f2</span>(x<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)) <span style="color:#75715e"># 再次除以2, 再次代入函数</span>
-</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> { <span style="color:#75715e"># 如果不符合, 则返回FALSE</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">FALSE</span>)
+</span></span><span style="display:flex;"><span>power2_f2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(x){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">if </span>(x <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) { <span style="color:#75715e"># 如果一直除下去, 结果为2, 则返回TRUE</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">return</span>(<span style="color:#66d9ef">TRUE</span>)
+</span></span><span style="display:flex;"><span>  } else <span style="color:#a6e22e">if </span>(x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span>) { <span style="color:#75715e"># 如果结果大于2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">return</span>(<span style="color:#a6e22e">power2_f2</span>(x<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)) <span style="color:#75715e"># 再次除以2, 再次代入函数</span>
+</span></span><span style="display:flex;"><span>  } else { <span style="color:#75715e"># 如果不符合, 则返回FALSE</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">return</span>(<span style="color:#66d9ef">FALSE</span>)
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -163,18 +163,18 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">## A2.3: 转化为二进制比较</span>
-</span></span><span style="display:flex;"><span>power2_f3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(x){
+</span></span><span style="display:flex;"><span>power2_f3 <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(x){
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 首先将x和x-1转化为二进制, 执行位运算AND操作</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 只有在两个输入序列中都为1时，结果序列的对应位置才为1，否则为0</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># 最后将上述位序列转换回整数形式, 并检查这个整数是否等于0</span>
 </span></span><span style="display:flex;"><span>  a <span style="color:#f92672">=</span> (<span style="color:#a6e22e">as.integer</span>( <span style="color:#a6e22e">intToBits</span>(x) <span style="color:#f92672">&amp;</span> <span style="color:#a6e22e">intToBits</span>(x<span style="color:#ae81ff">-1</span>) ) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(a)){ <span style="color:#75715e"># 遍历结果数组</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (a[i] <span style="color:#f92672">==</span> <span style="color:#66d9ef">FALSE</span>){ <span style="color:#75715e"># 只要发现有一个结果不是TRUE</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">FALSE</span>) <span style="color:#75715e"># 说明原数不是2的整数次幂</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for </span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(a)){ <span style="color:#75715e"># 遍历结果数组</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if </span>(a[i] <span style="color:#f92672">==</span> <span style="color:#66d9ef">FALSE</span>){ <span style="color:#75715e"># 只要发现有一个结果不是TRUE</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">return</span>(<span style="color:#66d9ef">FALSE</span>) <span style="color:#75715e"># 说明原数不是2的整数次幂</span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">TRUE</span>) <span style="color:#75715e"># 如果结果全是TRUE, 则说明原数是2的整数次幂</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(<span style="color:#66d9ef">TRUE</span>) <span style="color:#75715e"># 如果结果全是TRUE, 则说明原数是2的整数次幂</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
@@ -191,12 +191,12 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># A3.1: 排序找不连续</span>
-</span></span><span style="display:flex;"><span>findInt_f1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array){
+</span></span><span style="display:flex;"><span>findInt_f1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(array){
 </span></span><span style="display:flex;"><span>  sorted_array <span style="color:#f92672">=</span> <span style="color:#a6e22e">sort</span>(array) <span style="color:#75715e"># 数组排序</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">98</span>){ <span style="color:#75715e"># 遍历排序后的数组</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (sorted_array[i<span style="color:#ae81ff">+1</span>]<span style="color:#f92672">-</span>sorted_array[i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>){
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for </span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">98</span>){ <span style="color:#75715e"># 遍历排序后的数组</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">if </span>(sorted_array[i<span style="color:#ae81ff">+1</span>]<span style="color:#f92672">-</span>sorted_array[i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>){
 </span></span><span style="display:flex;"><span>      <span style="color:#75715e"># 如果右边的数减去左边的数不是1, 则返回左边的数加1为缺失的整数</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>(sorted_array[i]<span style="color:#ae81ff">+1</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">return</span>(sorted_array[i]<span style="color:#ae81ff">+1</span>)
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>}
@@ -207,9 +207,9 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#############################</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">## A3.2: 5050减去array的累加和</span>
-</span></span><span style="display:flex;"><span>findInt_f2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array){
+</span></span><span style="display:flex;"><span>findInt_f2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(array){
 </span></span><span style="display:flex;"><span>  array_sum <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(array) <span style="color:#75715e"># 求array的和</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>(<span style="color:#ae81ff">5050</span><span style="color:#f92672">-</span>array_sum) <span style="color:#75715e"># 返回值: 5050减去array的和则为缺失的整数</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">return</span>(<span style="color:#ae81ff">5050</span><span style="color:#f92672">-</span>array_sum) <span style="color:#75715e"># 返回值: 5050减去array的和则为缺失的整数</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 测试</span>
@@ -220,13 +220,13 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e">## A3.3: 哈希表</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 服务器已安装hash包</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># install.packages(&#34;hash&#34;)</span>
-</span></span><span style="display:flex;"><span>findInt_f3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(array){
+</span></span><span style="display:flex;"><span>findInt_f3 <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(array){
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">library</span>(hash) <span style="color:#75715e"># 引入hash包</span>
 </span></span><span style="display:flex;"><span>  h <span style="color:#f92672">=</span> <span style="color:#a6e22e">hash</span>() <span style="color:#75715e"># 创建一个哈希表</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">100</span>){ <span style="color:#75715e"># 添加键值对</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for </span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">100</span>){ <span style="color:#75715e"># 添加键值对</span>
 </span></span><span style="display:flex;"><span>    h[<span style="color:#a6e22e">[as.character</span>(i)]] <span style="color:#f92672">=</span> i <span style="color:#75715e">#键值必须为字符类型</span>
 </span></span><span style="display:flex;"><span>  }
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">99</span>){ <span style="color:#75715e"># 删除哈希表里面含有array对应的键值对</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">for </span>(j in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">99</span>){ <span style="color:#75715e"># 删除哈希表里面含有array对应的键值对</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">del</span>(<span style="color:#a6e22e">as.character</span>(array[j]),h)
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">keys</span>(h) <span style="color:#75715e"># 剩下的最后一个键值就是缺失的数字</span>

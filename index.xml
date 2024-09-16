@@ -4,121 +4,161 @@
     <title>Meteor03&#39;s Oxalis Garden</title>
     <link>https://meteor-oxalis3.github.io/</link>
     <description>Recent content on Meteor03&#39;s Oxalis Garden</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 26 May 2024 10:25:34 +0800</lastBuildDate>
-    <atom:link href="https://meteor-oxalis3.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Sep 2024 19:05:48 +0800</lastBuildDate><atom:link href="https://meteor-oxalis3.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BioChips_homework_01</title>
+      <link>https://meteor-oxalis3.github.io/rlang/biochips_homework_01/</link>
+      <pubDate>Wed, 11 Sep 2024 19:05:48 +0800</pubDate>
+      
+      <guid>https://meteor-oxalis3.github.io/rlang/biochips_homework_01/</guid>
+      <description>Affy 包处理 affymetrix 表达谱芯片 Questions 从Gene Expression Omnibus (GEO) 查询GSE65496，并下载GSE65496_family.</description>
+    </item>
+    
     <item>
       <title>R_homework_03</title>
       <link>https://meteor-oxalis3.github.io/rlang/r_homework_03/</link>
-      <pubDate>Sun, 26 May 2024 10:25:34 +0800</pubDate>
+      <pubDate>Sun, 26 May 2024 18:56:06 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/rlang/r_homework_03/</guid>
       <description>Questions Codes # # Rstudio Server URL: http://202.</description>
     </item>
+    
     <item>
       <title>Bioinfo_Homework_02</title>
       <link>https://meteor-oxalis3.github.io/rlang/bioinfo_homework_02/</link>
       <pubDate>Mon, 13 May 2024 19:06:16 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/rlang/bioinfo_homework_02/</guid>
       <description>Purposes 无序整型数组，求出该数组排序后的任意两个相邻元素的最大差值 Codes # Q: 有一个无序整型数组，如何求出该数组排序后的任意两个相邻元素的最大差值？ # 要求时间和空间复杂度尽可能低。 # A1: 使用任意一种排序算法，给原数组排序，然后遍历排好序的数组， # 并对两个相邻元素求差，最终得到最大差值。 array = c(2,6,3,4,5,10,9) # 计算差值 sort2Find = function(fun,array){ sorted_array = fun(array) # 替换成别的排序方法 temp = 0 # 初始化差值计数器 for (i in 1:(length(array)-1)){ # 遍历数组 if (temp &amp;lt; (sorted_array[i+1]-sorted_array[i])){ temp = sorted_array[i+1]-sorted_array[i] # 如果找到更大的差值，则覆盖 } } return(temp) } # A1.</description>
     </item>
+    
     <item>
       <title>Bioinfo_Homework_01</title>
       <link>https://meteor-oxalis3.github.io/rlang/bioinfo_homework_01/</link>
       <pubDate>Wed, 08 May 2024 00:45:04 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/rlang/bioinfo_homework_01/</guid>
       <description>Purposes 1. 最大公约数计算： 通过比较暴力枚举法和辗转相除法，探讨不同算法在计算最大公约数时的效率和适用性，从而了解算法选择对于特定问题的影响。 2. 判断2的整数次幂： 通过穷举法、递归法和转化为二进制比较法，比较不同判断方法的准确性和执行效率，进一步理解算法设计中的考虑因素。 3.</description>
     </item>
+    
     <item>
       <title>R_homework_02</title>
       <link>https://meteor-oxalis3.github.io/rlang/r_homework_02/</link>
       <pubDate>Sat, 04 May 2024 14:46:23 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/rlang/r_homework_02/</guid>
       <description>Questions Codes # Rstudio Server URL: http://202.</description>
     </item>
+    
     <item>
       <title>R_homework_01</title>
       <link>https://meteor-oxalis3.github.io/rlang/r_homework_01/</link>
       <pubDate>Sat, 27 Apr 2024 09:40:43 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/rlang/r_homework_01/</guid>
       <description>Questions Codes # Rstudio Server URL: http://202.</description>
     </item>
+    
     <item>
       <title>Gentoo in Docker</title>
       <link>https://meteor-oxalis3.github.io/linux/gentoo_in_docker/</link>
       <pubDate>Sat, 13 Apr 2024 22:35:37 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/linux/gentoo_in_docker/</guid>
       <description>Host Machine Info Host: Raspberry Pi 5 Model B Rev 1.</description>
     </item>
+    
     <item>
       <title>HTML Support</title>
       <link>https://meteor-oxalis3.github.io/hugo/html_support/</link>
       <pubDate>Mon, 08 Jan 2024 15:39:34 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/hugo/html_support/</guid>
       <description>Enable HTML in Hugo Steps 1.</description>
     </item>
+    
     <item>
       <title>R_homework04</title>
       <link>https://meteor-oxalis3.github.io/rlang/r_homework04/</link>
       <pubDate>Mon, 25 Dec 2023 21:42:09 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/rlang/r_homework04/</guid>
       <description>Questions Here’s the fourth R homework.</description>
     </item>
+    
     <item>
       <title>R_homework03</title>
       <link>https://meteor-oxalis3.github.io/rlang/r_homework03/</link>
       <pubDate>Mon, 18 Dec 2023 00:14:05 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/rlang/r_homework03/</guid>
       <description>Questions Here&amp;rsquo;s the third R homework.</description>
     </item>
+    
     <item>
       <title>Stcp of FRP for SSH</title>
       <link>https://meteor-oxalis3.github.io/linux/stcp_of_frp/</link>
       <pubDate>Mon, 11 Dec 2023 23:03:23 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/linux/stcp_of_frp/</guid>
       <description>PS 嗨嗨嗨，鸽了好久的FRP内网穿透教程终于可以续上了！ (本教程&amp;quot;应该&amp;quot;会给你带来安全、便捷的SSH连接体验，让你随时随地连上你的内网机器～) Diagram Preparations VPS *1 Network to Github intranet host *1 Configures 1.</description>
     </item>
+    
     <item>
       <title>The Truth In The Mirror</title>
       <link>https://meteor-oxalis3.github.io/article/the_truth_in_the_mirror/</link>
       <pubDate>Fri, 08 Dec 2023 12:50:44 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/article/the_truth_in_the_mirror/</guid>
       <description>《镜子中的&amp;quot;真&amp;quot;》 Meteor_Oxalis3 ©️ All Rights Reserved.</description>
     </item>
+    
     <item>
       <title>Gene Database</title>
       <link>https://meteor-oxalis3.github.io/mysql/gene-database/</link>
       <pubDate>Fri, 08 Dec 2023 00:59:26 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/mysql/gene-database/</guid>
       <description>Meteor03&amp;rsquo;s Gene Database (The final homework of MySQL lesson)</description>
     </item>
+    
     <item>
       <title>R_homework02</title>
       <link>https://meteor-oxalis3.github.io/rlang/r_homework02/</link>
       <pubDate>Mon, 04 Dec 2023 03:08:25 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/rlang/r_homework02/</guid>
       <description>Codes library(readr) library(dplyr) # 读取数据文件 data = read_csv(&amp;#34;dat1.</description>
     </item>
+    
     <item>
       <title>R_homework01</title>
       <link>https://meteor-oxalis3.github.io/rlang/r_homework01/</link>
       <pubDate>Sun, 26 Nov 2023 11:38:06 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/rlang/r_homework01/</guid>
       <description>Codes # Added means &amp;amp; sds means &amp;lt;- c(0, 0, 0, -2) sds &amp;lt;- c(sqrt(0.</description>
     </item>
+    
     <item>
       <title>Mercari Fee Caculator</title>
       <link>https://meteor-oxalis3.github.io/clang/mercari/</link>
       <pubDate>Wed, 15 Nov 2023 00:51:39 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/clang/mercari/</guid>
       <description>闲鱼Mercari 代购费用计算 My ver. #include &amp;lt;stdio.</description>
     </item>
+    
     <item>
       <title>My First.</title>
       <link>https://meteor-oxalis3.github.io/post/my_first/</link>
       <pubDate>Tue, 14 Nov 2023 22:26:24 +0800</pubDate>
+      
       <guid>https://meteor-oxalis3.github.io/post/my_first/</guid>
       <description>&amp;ldquo;We&amp;rsquo;re bound to shine~&amp;rdquo; How to push my blogs?</description>
     </item>
+    
   </channel>
 </rss>

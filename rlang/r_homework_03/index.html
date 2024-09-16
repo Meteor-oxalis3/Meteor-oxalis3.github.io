@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
     
 
-    <meta name="generator" content="Hugo 0.126.1">
+    <meta name="generator" content="Hugo 0.111.3">
 </head>
 
 
@@ -69,7 +69,7 @@
         
         <div class="article-meta">
             <a href="/rlang/r_homework_03/" class="article-date">
-                <time datetime='2024-05-26T10:25:34.000&#43;08:00' itemprop="datePublished">2024-05-26</time>
+                <time datetime='2024-05-26T18:56:06.000&#43;08:00' itemprop="datePublished">2024-05-26</time>
             </a>
             
             
@@ -79,8 +79,7 @@
             <h2 id="questions">Questions</h2>
 <p><img src="/images/R02_question_03.png" alt=""></p>
 <h2 id="codes">Codes</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># # Rstudio Server URL: http://202.195.187.9:8787/</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e"># # Rstudio Server URL: http://202.195.187.9:8787/</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 账号密码与Linux一致</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 切换R路径</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">.libPaths</span>(<span style="color:#e6db74">&#34;/home/biotools/anaconda3/envs/R4.3.1/lib/R/&#34;</span>)
@@ -133,8 +132,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">colnames</span>(result) <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;HR&#34;</span>, <span style="color:#e6db74">&#34;Lower 95% CI&#34;</span>, <span style="color:#e6db74">&#34;Upper 95% CI&#34;</span>)
 </span></span><span style="display:flex;"><span>result
 </span></span></code></pre></div><h2 id="output">Output</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">summary</span>(exp_model)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">summary</span>(exp_model)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Call<span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">survreg</span>(formula <span style="color:#f92672">=</span> surv_obj <span style="color:#f92672">~</span> age <span style="color:#f92672">+</span> sex <span style="color:#f92672">+</span> ph.ecog <span style="color:#f92672">+</span> wt.loss, data <span style="color:#f92672">=</span> lung, 
@@ -240,52 +238,46 @@
 </li>
 <li>
 <p>Cox回归</p>
+</li>
+</ul>
 <table>
 <thead>
 <tr>
-<th>Variable</th>
-<th>HR</th>
-<th>Lower 95% CI</th>
-<th>Upper 95% CI</th>
+<th style="text-align:left">Variable</th>
+<th style="text-align:center">HR</th>
+<th style="text-align:center">Lower 95% CI</th>
+<th style="text-align:center">Upper 95% CI</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td style="text-align:left">age</td>
+<td style="text-align:center">1.0134589</td>
+<td style="text-align:center">0.9945143</td>
+<td style="text-align:center">1.0327643</td>
 </tr>
 <tr>
-<td>age</td>
-<td>1.0134589</td>
-<td>0.9945143</td>
-<td>1.0327643</td>
+<td style="text-align:left">sex</td>
+<td style="text-align:center">0.5538981</td>
+<td style="text-align:center">0.3928084</td>
+<td style="text-align:center">0.7810504</td>
 </tr>
 <tr>
-<td>sex</td>
-<td>0.5538981</td>
-<td>0.3928084</td>
-<td>0.7810504</td>
+<td style="text-align:left">ph.ecog</td>
+<td style="text-align:center">1.6738244</td>
+<td style="text-align:center">1.3075807</td>
+<td style="text-align:center">2.1426504</td>
 </tr>
 <tr>
-<td>ph.ecog</td>
-<td>1.6738244</td>
-<td>1.3075807</td>
-<td>2.1426504</td>
-</tr>
-<tr>
-<td>wt.loss</td>
-<td>0.9910344</td>
-<td>0.9781867</td>
-<td>1.0040508</td>
+<td style="text-align:left">wt.loss</td>
+<td style="text-align:center">0.9910344</td>
+<td style="text-align:center">0.9781867</td>
+<td style="text-align:center">1.0040508</td>
 </tr>
 </tbody>
 </table>
-</li>
-<li>
-<p>结论：性别（sex）和ECOG评分（ph.ecog）对生存时间有显著影响，而年龄（age）和体重减轻（wt.loss）的影响不显著。</p>
-</li>
+<ul>
+<li>结论：性别（sex）和ECOG评分（ph.ecog）对生存时间有显著影响，而年龄（age）和体重减轻（wt.loss）的影响不显著。</li>
 </ul>
 
         </div>
@@ -313,6 +305,12 @@
     </div>
     
 <nav id="article-nav">
+    
+    <a href="/rlang/biochips_homework_01/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            BioChips_homework_01
+        </div>
+    </a>
     
     
     <a href="/rlang/bioinfo_homework_02/" id="article-nav-older" class="article-nav-link-wrap">
