@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Micromamba Guide // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Micromamba Guide" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/linux/micromamba/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.111.3">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/hugo/">Hugo</a>
+                
+                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                
+                <a class="main-nav-link" href="/rlang/">Rlang</a>
+                
+                <a class="main-nav-link" href="/clang/">Clang</a>
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+                <a class="main-nav-link" href="/linux/">Linux</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Micromamba Guide</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/linux/micromamba/" class="article-date">
+                <time datetime='2024-10-01T19:38:34.000&#43;08:00' itemprop="datePublished">2024-10-01</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="官方指南">官方指南</h2>
+<p><a href="https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html">micromamba 官方用户指南</a></p>
+<hr>
+<h2 id="下载">下载</h2>
+<ul>
+<li>根据你的系统架构来选择对应命令</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># Linux Intel (x86_64):</span>
+</span></span><span style="display:flex;"><span>curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Linux ARM64:</span>
+</span></span><span style="display:flex;"><span>curl -Ls https://micro.mamba.pm/api/micromamba/linux-aarch64/latest | tar -xvj bin/micromamba
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Linux Power:</span>
+</span></span><span style="display:flex;"><span>curl -Ls https://micro.mamba.pm/api/micromamba/linux-ppc64le/latest | tar -xvj bin/micromamba
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># macOS Intel (x86_64):</span>
+</span></span><span style="display:flex;"><span>curl -Ls https://micro.mamba.pm/api/micromamba/osx-64/latest | tar -xvj bin/micromamba
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># macOS Silicon/M1 (ARM64):</span>
+</span></span><span style="display:flex;"><span>curl -Ls https://micro.mamba.pm/api/micromamba/osx-arm64/latest | tar -xvj bin/micromamba
+</span></span></code></pre></div><ul>
+<li>不知道选什么的可以查看一下</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>uname -mo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># x86_64 GNU/Linux</span>
+</span></span></code></pre></div><p>发现是 <code>Linux x86_64</code>，所以选第一行命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+</span></span></code></pre></div><hr>
+<h2 id="移动">移动</h2>
+<ul>
+<li>移动 <code>micromamba</code> 二进制文件到你的 <code>$PATH</code> 文件夹之一</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mv ./bin/micromamba ~/.local/bin
+</span></span></code></pre></div><ul>
+<li>或者自己添加一个新的 <code>$PATH</code></li>
+</ul>
+<hr>
+<h2 id="配置">配置</h2>
+<ul>
+<li>初始化shell</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>micromamba shell init -s bash -r ~/micromamba
+</span></span><span style="display:flex;"><span>source ~/.bashrc
+</span></span></code></pre></div><ul>
+<li>这样shell初始化好了，主目录下的 <code>micromamba</code> 文件夹存放虚拟环境等相关文件</li>
+</ul>
+<h2 id="测试">测试</h2>
+<ul>
+<li>新建虚拟环境</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>micromamba env create -n GATK4
+</span></span></code></pre></div><ul>
+<li>进入虚拟环境</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>micromamba activate GATK4
+</span></span></code></pre></div><p>可以发现我们的shell前面多了个虚拟环境提示 <code>(GATK)</code></p>
+<pre tabindex="0"><code>(GATK4) [saturn@Debian ~]$
+</code></pre><ul>
+<li>装个 <code>GATK4</code> 试试</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>micromamba install -c bioconda -c conda-forge gatk4
+</span></span></code></pre></div><p>输入 <code>Y</code> 后回车</p>
+<ul>
+<li>看看 <code>GATK</code> 版本</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gatk --version
+</span></span></code></pre></div><hr>
+<h2 id="进阶">进阶</h2>
+<ul>
+<li>
+<p>方便以后安装软件，可设置默认频道</p>
+</li>
+<li>
+<p>创建 <code>.mambarc</code></p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>vim ~/.mambarc
+</span></span></code></pre></div><ul>
+<li>并且修改内容为</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">channels</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">bioconda</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#ae81ff">conda-forge</span>
+</span></span></code></pre></div><ul>
+<li>这样安装大部分生物软件就不用再指定频道 <code>-c bioconda</code> 和 <code>-c conda-forge</code> 啦</li>
+</ul>
+<hr>
+<h2 id="附常用命令">附：常用命令</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 新建虚拟环境</span>
+</span></span><span style="display:flex;"><span>micromamba env create -n ENV_NAME
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 激活虚拟环境</span>
+</span></span><span style="display:flex;"><span>micromamba activate ENV_NAME
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 退出当前虚拟环境</span>
+</span></span><span style="display:flex;"><span>micromamba deactivate
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 列出所有虚拟环境</span>
+</span></span><span style="display:flex;"><span>micromamba env list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装软件</span>
+</span></span><span style="display:flex;"><span>micromamba install -c CHANNEL_NAME SOFTWARE_NAME
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 卸载软件</span>
+</span></span><span style="display:flex;"><span>micromamba remove SOFTWARE_NAME
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 更新当前环境内软件</span>
+</span></span><span style="display:flex;"><span>micromamba update
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 更新 micromamba 软件本身</span>
+</span></span><span style="display:flex;"><span>micromamba self-update
+</span></span></code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#官方指南">官方指南</a></li>
+    <li><a href="#下载">下载</a></li>
+    <li><a href="#移动">移动</a></li>
+    <li><a href="#配置">配置</a></li>
+    <li><a href="#测试">测试</a></li>
+    <li><a href="#进阶">进阶</a></li>
+    <li><a href="#附常用命令">附：常用命令</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="/rlang/biochips_homework_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">BioChips_homework_01&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2024 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

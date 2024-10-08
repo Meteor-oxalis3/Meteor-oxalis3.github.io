@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://meteor-oxalis3.github.io/rlang/biochips_homework_01/</loc>
-    <lastmod>2024-09-11T19:05:48+08:00</lastmod>
+    <loc>https://meteor-oxalis3.github.io/linux/</loc>
+    <lastmod>2024-10-01T19:38:34+08:00</lastmod>
   </url><url>
     <loc>https://meteor-oxalis3.github.io/</loc>
+    <lastmod>2024-10-01T19:38:34+08:00</lastmod>
+  </url><url>
+    <loc>https://meteor-oxalis3.github.io/linux/micromamba/</loc>
+    <lastmod>2024-10-01T19:38:34+08:00</lastmod>
+  </url><url>
+    <loc>https://meteor-oxalis3.github.io/rlang/biochips_homework_01/</loc>
     <lastmod>2024-09-11T19:05:48+08:00</lastmod>
   </url><url>
     <loc>https://meteor-oxalis3.github.io/rlang/</loc>
@@ -27,9 +33,6 @@
     <lastmod>2024-04-27T09:40:43+08:00</lastmod>
   </url><url>
     <loc>https://meteor-oxalis3.github.io/linux/gentoo_in_docker/</loc>
-    <lastmod>2024-04-13T22:35:37+08:00</lastmod>
-  </url><url>
-    <loc>https://meteor-oxalis3.github.io/linux/</loc>
     <lastmod>2024-04-13T22:35:37+08:00</lastmod>
   </url><url>
     <loc>https://meteor-oxalis3.github.io/hugo/html_support/</loc>
