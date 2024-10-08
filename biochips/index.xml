@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Biochips on Meteor03&#39;s Oxalis Garden</title>
+    <link>https://meteor-oxalis3.github.io/biochips/</link>
+    <description>Recent content in Biochips on Meteor03&#39;s Oxalis Garden</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 11 Sep 2024 19:05:48 +0800</lastBuildDate><atom:link href="https://meteor-oxalis3.github.io/biochips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BioChips_homework_01</title>
+      <link>https://meteor-oxalis3.github.io/biochips/biochips_homework_01/</link>
+      <pubDate>Wed, 11 Sep 2024 19:05:48 +0800</pubDate>
+      
+      <guid>https://meteor-oxalis3.github.io/biochips/biochips_homework_01/</guid>
+      <description>Affy 包处理 affymetrix 表达谱芯片 Questions 从Gene Expression Omnibus (GEO) 查询GSE65496，并下载GSE65496_family.</description>
+    </item>
+    
+  </channel>
+</rss>

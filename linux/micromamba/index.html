@@ -38,17 +38,13 @@
             <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
             <nav id="main-nav">
                 
-                <a class="main-nav-link" href="/hugo/">Hugo</a>
+                <a class="main-nav-link" href="/linux/">Linux</a>
                 
-                <a class="main-nav-link" href="/mysql/">MySQL</a>
+                <a class="main-nav-link" href="">NGS</a>
                 
-                <a class="main-nav-link" href="/rlang/">Rlang</a>
-                
-                <a class="main-nav-link" href="/clang/">Clang</a>
+                <a class="main-nav-link" href="/biochips/">BioChips</a>
                 
                 <a class="main-nav-link" href="/article/">Article</a>
-                
-                <a class="main-nav-link" href="/linux/">Linux</a>
                 
             </nav>
             <nav id="sub-nav">
@@ -101,13 +97,18 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是:</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># x86_64 GNU/Linux</span>
 </span></span></code></pre></div><p>发现是 <code>Linux x86_64</code>，所以选第一行命令</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 下载会有点慢, 还请耐心等待</span>
+</span></span><span style="display:flex;"><span>curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
 </span></span></code></pre></div><hr>
 <h2 id="移动">移动</h2>
 <ul>
 <li>移动 <code>micromamba</code> 二进制文件到你的 <code>$PATH</code> 文件夹之一</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mv ./bin/micromamba ~/.local/bin
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 保险起见, 先新建文件夹</span>
+</span></span><span style="display:flex;"><span>mkdir ~/.local/bin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 开始移动</span>
+</span></span><span style="display:flex;"><span>mv ./bin/micromamba ~/.local/bin
 </span></span></code></pre></div><ul>
 <li>或者自己添加一个新的 <code>$PATH</code></li>
 </ul>
@@ -217,7 +218,7 @@
 <nav id="article-nav">
     
     
-    <a href="/rlang/biochips_homework_01/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/biochips/biochips_homework_01/" id="article-nav-older" class="article-nav-link-wrap">
         <div class="article-nav-title">BioChips_homework_01&nbsp;<span>&gt;</span></div>
     </a>
     
