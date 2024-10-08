@@ -102,7 +102,7 @@
 </span></span></code></pre></div><hr>
 <h2 id="移动">移动</h2>
 <ul>
-<li>移动 <code>micromamba</code> 二进制文件到你的 <code>$PATH</code> 文件夹之一</li>
+<li>移动 <code>micromamba</code> 二进制文件到你的 <code>$PATH</code> 文件夹之一 (或者自己添加一个新的 <code>$PATH</code>)</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 保险起见, 先新建文件夹</span>
 </span></span><span style="display:flex;"><span>mkdir -p ~/.local/bin
@@ -110,9 +110,13 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 开始移动</span>
 </span></span><span style="display:flex;"><span>mv ./bin/micromamba ~/.local/bin
 </span></span></code></pre></div><ul>
-<li>或者自己添加一个新的 <code>$PATH</code></li>
+<li>测试 <code>micromamba</code> 是否已经添加到你的 <code>$PATH</code> 里面了</li>
 </ul>
-<hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>micromamba --version
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2.0.2</span>
+</span></span></code></pre></div><hr>
 <h2 id="配置">配置</h2>
 <ul>
 <li>初始化shell</li>
@@ -122,6 +126,7 @@
 </span></span></code></pre></div><ul>
 <li>这样 shell 就初始化好了，主目录下的 <code>micromamba</code> 文件夹存放虚拟环境等相关文件</li>
 </ul>
+<hr>
 <h2 id="测试">测试</h2>
 <ul>
 <li>新建虚拟环境</li>
@@ -135,7 +140,7 @@
 <pre tabindex="0"><code># 默认状态下的 bash 会显示:
 # (GATK4) [saturn@Debian ~]$
 
-# 假如你装了 starship, 默认会显示:
+# 假如你装了 starship , 默认会显示:
 # ~ via 🅒 GATK4 
 # ❯ 
 </code></pre><ul>
@@ -149,13 +154,12 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gatk --version
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是:</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Using GATK jar /public/workspace/stu22230111/micromamba/envs/gatk4/share/gatk4-4.3.0.0-0/gatk-package-4.3.0.0-local.jar</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Using GATK jar /public/workspace/stu22230111/micromamba/envs/gatk4/share/gatk4-4.5.0.0-0/gatk-package-4.5.0.0-local.jar</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Running:</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#     java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /public/workspace/stu22230111/micromamba/envs/gatk4/share/gatk4-4.3.0.0-0/gatk-package-4.3.0.0-local.jar --version</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># The Genome Analysis Toolkit (GATK) v4.3.0.0</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># HTSJDK Version: 3.0.1</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Picard Version: 2.27.5</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /public/workspace/stu22230111/micromamba/envs/gatk4/share/gatk4-4.5.0.0-0/gatk-package-4.5.0.0-local.jar --version</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># The Genome Analysis Toolkit (GATK) v4.5.0.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># HTSJDK Version: 4.1.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Picard Version: 3.1.1</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 说明安装成功啦!</span>
 </span></span></code></pre></div><hr>
@@ -198,8 +202,11 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 卸载软件</span>
 </span></span><span style="display:flex;"><span>micromamba remove SOFTWARE_NAME
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 更新当前环境内软件</span>
-</span></span><span style="display:flex;"><span>micromamba update
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 更新当前环境内指定软件</span>
+</span></span><span style="display:flex;"><span>micromamba update PACKAGE_NAME
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 更新当前环境内所有软件</span>
+</span></span><span style="display:flex;"><span>micromamba update --all
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 更新 micromamba 软件本身</span>
 </span></span><span style="display:flex;"><span>micromamba self-update
