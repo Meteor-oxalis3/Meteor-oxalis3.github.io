@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NGS_lab0 // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="NGS_lab0" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/ngs/ngs_lab0/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.111.3">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/linux/">Linux</a>
+                
+                <a class="main-nav-link" href="/ngs/">NGS</a>
+                
+                <a class="main-nav-link" href="">Microarray</a>
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">NGS_lab0</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/ngs/ngs_lab0/" class="article-date">
+                <time datetime='2024-10-08T21:16:49.000&#43;08:00' itemprop="datePublished">2024-10-08</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="任务">任务</h2>
+<ol>
+<li>练习 <code>screen</code>或 <code>tmux</code> ，后续的所有操作尽量放在会话中</li>
+<li>练习 lab0.html 代码</li>
+<li>安装 <a href="https://bioinf.shenwei.me/seqkit/">SeqKit2</a></li>
+<li>利用 SeqKit2 从 <code>/public/workspace/shaojf/Course/NGS/DataSets/Lab0/ENCFF000PAI.fastq.gz</code> 随机提取1000条序列，保存到 <code>~/NGS/Lab0/seqkit.s1000.fastq</code> ( <code>wc -l seqkit.s1000.fastq</code> 应得到4000)</li>
+</ol>
+<hr>
+<h2 id="1-练习-screen-或-tmux">1. 练习 <code>screen</code> 或 <code>tmux</code></h2>
+<h3 id="screen">screen</h3>
+<ul>
+<li>screen在新建会话后会默认进入所建会话</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 新建screen会话&#39;lab0&#39;</span>
+</span></span><span style="display:flex;"><span>screen -S lab0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 若想要退出tmux会话, 先 Ctrl+a 一起按, 然后再按d</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 再次进入screen会话&#39;lab0&#39;</span>
+</span></span><span style="display:flex;"><span>screen -r lab0
+</span></span></code></pre></div><h3 id="tmux">tmux</h3>
+<ul>
+<li>screen在新建会话后也会默认进入所建会话</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 新建tmux会话&#39;lab0&#39;</span>
+</span></span><span style="display:flex;"><span>tmux new -s lab0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 若想要退出tmux会话, 先 Ctrl+b 一起按, 然后再按d</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 再次进入tmux会话&#39;lab0&#39;</span>
+</span></span><span style="display:flex;"><span>tmux a -t lab0
+</span></span></code></pre></div><hr>
+<h2 id="2-练习-lab0html-代码">2. 练习 lab0.html 代码</h2>
+<ul>
+<li>略</li>
+</ul>
+<hr>
+<h2 id="3-安装-seqkit2">3. 安装 <code>SeqKit2</code></h2>
+<p>( <code>anaconda</code> 与 <code>micromamba</code> 二选一即可 )</p>
+<h3 id="使用-anaconda-安装">使用 <code>anaconda</code> 安装</h3>
+<ul>
+<li>新建虚拟环境 <code>seqkit2</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda create -n seqkit2
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 y , 然后回车</span>
+</span></span></code></pre></div><ul>
+<li>进入虚拟环境 <code>seqkit2</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda activate seqkit2
+</span></span></code></pre></div><ul>
+<li>安装 <code>seqkit2</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 注意！是seqkit，后面不用加2</span>
+</span></span><span style="display:flex;"><span>conda install -c bioconda seqkit
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 y , 然后回车</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验是否安装成功</span>
+</span></span><span style="display:flex;"><span>seqkit version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是: seqkit v2.8.2</span>
+</span></span></code></pre></div><hr>
+<h3 id="使用-micromamba-安装">使用 <code>micromamba</code> 安装</h3>
+<ul>
+<li>新建虚拟环境 <code>seqkit2</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 和 anaconda 不同, micromamba 在新建虚拟环境的时候需要加上 env</span>
+</span></span><span style="display:flex;"><span>micromamba env create -n seqkit2
+</span></span></code></pre></div><ul>
+<li>进入虚拟环境 <code>seqkit2</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>micromamba activate seqkit2
+</span></span></code></pre></div><ul>
+<li>安装 <code>seqkit2</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 注意！是seqkit，后面不用加2</span>
+</span></span><span style="display:flex;"><span>micromamba install -c bioconda seqkit
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待进度条消失后，输入 Y ，然后回车</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验是否安装成功</span>
+</span></span><span style="display:flex;"><span>seqkit version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是: seqkit v2.8.2</span>
+</span></span></code></pre></div><hr>
+<h2 id="4-随机提取1000条序列">4. 随机提取1000条序列</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 创建指定文件夹</span>
+</span></span><span style="display:flex;"><span>mkdir -p ~/NGS/Lab0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 随机提取1000条序列</span>
+</span></span><span style="display:flex;"><span>seqkit sample -n <span style="color:#ae81ff">1000</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>/public/workspace/shaojf/Course/NGS/DataSets/Lab0/ENCFF000PAI.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>-o ~/NGS/Lab0/seqkit.s1000.fastq
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 整个处理过程有点慢，因为要先把整个fastq读取到内存里面，稍安勿躁～</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检查一下</span>
+</span></span><span style="display:flex;"><span>wc -l ~/NGS/Lab0/seqkit.s1000.fastq
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 若输出结果是4000的话, 说明你完美成功啦!</span>
+</span></span></code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#任务">任务</a></li>
+    <li><a href="#1-练习-screen-或-tmux">1. 练习 <code>screen</code> 或 <code>tmux</code></a>
+      <ul>
+        <li><a href="#screen">screen</a></li>
+        <li><a href="#tmux">tmux</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-练习-lab0html-代码">2. 练习 lab0.html 代码</a></li>
+    <li><a href="#3-安装-seqkit2">3. 安装 <code>SeqKit2</code></a>
+      <ul>
+        <li><a href="#使用-anaconda-安装">使用 <code>anaconda</code> 安装</a></li>
+        <li><a href="#使用-micromamba-安装">使用 <code>micromamba</code> 安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-随机提取1000条序列">4. 随机提取1000条序列</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="/linux/micromamba/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Micromamba Guide&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2024 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>
