@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script defer src="https://umami.dudleya.cc/script.js" data-website-id="ced50e3a-a449-456e-ac66-f7dfe60706c9"></script>
+
+    <title>NGS_lab1 // Meteor03&#39;s Oxalis Garden</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="NGS_lab1" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://meteor-oxalis3.github.io/ngs/ngs_lab1/" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link href="https://meteor-oxalis3.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://meteor-oxalis3.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://meteor-oxalis3.github.io/css/style.css">
+    
+
+    <meta name="generator" content="Hugo 0.111.3">
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://meteor-oxalis3.github.io/">Meteor03&#39;s Oxalis Garden</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/linux/">Linux</a>
+                
+                <a class="main-nav-link" href="/ngs/">NGS</a>
+                
+                <a class="main-nav-link" href="">Microarray</a>
+                
+                <a class="main-nav-link" href="/article/">Article</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">NGS_lab1</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/ngs/ngs_lab1/" class="article-date">
+                <time datetime='2024-10-11T09:31:45.000&#43;08:00' itemprop="datePublished">2024-10-11</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="数据下载与质量评估">数据下载与质量评估</h1>
+<h2 id="数据库网站">数据库网站</h2>
+<ul>
+<li><a href="https://www.ncbi.nlm.nih.gov/sra">SRA (Sequence Read Archive)</a></li>
+<li><a href="https://www.ebi.ac.uk/ena/browser/home">ENA (European Nucleotide Archive)</a></li>
+<li><a href="https://ngdc.cncb.ac.cn/gsa/">GSA (Genome Sequence Archive)</a></li>
+</ul>
+<hr>
+<h2 id="数据下载工具">数据下载工具</h2>
+<ul>
+<li><a href="https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit">SRA Toolkit</a></li>
+<li><a href="https://www.gnu.org/software/wget/">Wget</a></li>
+<li><a href="https://aspera.ibmaspera.com/help/aspera_connect">Aspera Connect</a></li>
+</ul>
+<hr>
+<h2 id="质量评估工具">质量评估工具</h2>
+<ul>
+<li><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a></li>
+<li><a href="https://multiqc.info/">MultiQC</a></li>
+</ul>
+<hr>
+<h2 id="安装-sra-toolkit">安装 <code>SRA Toolkit</code></h2>
+<p>( 挑个你喜欢的方法安装就好～ )</p>
+<ul>
+<li>方法一：<code>anaconda</code> 或 <code>micromamba</code> (<strong>推荐</strong>)</li>
+<li>方法二：下载预编译的二进制文件</li>
+</ul>
+<h3 id="使用-anaconda-安装">使用 <code>anaconda</code> 安装</h3>
+<ul>
+<li>新建虚拟环境 <code>sra-tools</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda create -n sra-tools
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 y , 然后回车</span>
+</span></span></code></pre></div><ul>
+<li>进入虚拟环境 <code>sra-tools</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda activate sra-tools
+</span></span></code></pre></div><ul>
+<li>安装 <code>SRA Toolkit</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 注意！如果不添加 -c conda-forge, 则默认无法下载最新版本的 sra-tools</span>
+</span></span><span style="display:flex;"><span>conda install -c bioconda -c conda-forge sra-tools
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 y , 然后回车</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验是否安装成功</span>
+</span></span><span style="display:flex;"><span>srapath --version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是: </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># srapath : 3.1.1</span>
+</span></span></code></pre></div><h3 id="使用-micromamba-安装">使用 <code>micromamba</code> 安装</h3>
+<ul>
+<li>新建虚拟环境 <code>sra-tools</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 和 anaconda 不同, micromamba 在新建虚拟环境的时候需要加上 env</span>
+</span></span><span style="display:flex;"><span>micromamba env create -n sra-tools
+</span></span></code></pre></div><ul>
+<li>进入虚拟环境 <code>sra-tools</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>micromamba activate sra-tools
+</span></span></code></pre></div><ul>
+<li>安装 <code>SRA Toolkit</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 注意！如果不添加 -c conda-forge, 则默认无法下载最新版本的 sra-tools</span>
+</span></span><span style="display:flex;"><span>micromamba install -c bioconda -c conda-forge sra-tools
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 Y , 然后回车</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验是否安装成功</span>
+</span></span><span style="display:flex;"><span>srapath --version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是: </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># srapath : 3.1.1</span>
+</span></span></code></pre></div><hr>
+<h2 id="安装-fastqc">安装 <code>FastQC</code></h2>
+<p>( 挑个你喜欢的方法安装就好～ )</p>
+<ul>
+<li>方法一：<code>anaconda</code> 或 <code>micromamba</code> (<strong>推荐</strong>)</li>
+<li>方法二：下载预编译的二进制文件</li>
+</ul>
+<h3 id="使用-anaconda-安装-1">使用 <code>anaconda</code> 安装</h3>
+<ul>
+<li>新建虚拟环境 <code>fastqc</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda create -n fastqc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 y , 然后回车</span>
+</span></span></code></pre></div><ul>
+<li>进入虚拟环境 <code>fastqc</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda activate fastqc
+</span></span></code></pre></div><ul>
+<li>安装 <code>FastQC</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda install -c bioconda fastqc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 y , 然后回车</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验是否安装成功</span>
+</span></span><span style="display:flex;"><span>fastqc --version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是: </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastQC v0.12.1</span>
+</span></span></code></pre></div><h3 id="使用-micromamba-安装-1">使用 <code>micromamba</code> 安装</h3>
+<ul>
+<li>新建虚拟环境 <code>fastqc</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 和 anaconda 不同, micromamba 在新建虚拟环境的时候需要加上 env</span>
+</span></span><span style="display:flex;"><span>micromamba env create -n fastqc
+</span></span></code></pre></div><ul>
+<li>进入虚拟环境 <code>fastqc</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>micromamba activate fastqc
+</span></span></code></pre></div><ul>
+<li>安装 <code>FastQC</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 注意！如果不添加 -c conda-forge, 则默认无法下载最新版本的 sra-tools</span>
+</span></span><span style="display:flex;"><span>micromamba install -c bioconda -c conda-forge fastqc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 Y , 然后回车</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验是否安装成功</span>
+</span></span><span style="display:flex;"><span>fastqc --version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是: </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastQC v0.12.1</span>
+</span></span></code></pre></div><hr>
+<h2 id="安装-multiqc">安装 <code>MultiQC</code></h2>
+<p>( 挑个你喜欢的方法安装就好～ )</p>
+<ul>
+<li>方法一：<code>anaconda</code> 或 <code>micromamba</code> (<strong>推荐</strong>)</li>
+<li>方法二：下载预编译的二进制文件</li>
+</ul>
+<h3 id="使用-anaconda-安装-2">使用 <code>anaconda</code> 安装</h3>
+<ul>
+<li>新建虚拟环境 <code>multiqc</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda create -n multiqc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 y , 然后回车</span>
+</span></span></code></pre></div><ul>
+<li>进入虚拟环境 <code>multiqc</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>conda activate multiqc
+</span></span></code></pre></div><ul>
+<li>安装 <code>MultiQC</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 注意！如果不添加 -c conda-forge, 则默认无法下载最新版本的 multiqc</span>
+</span></span><span style="display:flex;"><span>conda install -c bioconda -c conda-forge multiqc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 y , 然后回车</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验是否安装成功</span>
+</span></span><span style="display:flex;"><span>multiqc --version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是: </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc, version 1.8</span>
+</span></span></code></pre></div><h3 id="使用-micromamba-安装-2">使用 <code>micromamba</code> 安装</h3>
+<ul>
+<li>新建虚拟环境 <code>multiqc</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 和 anaconda 不同, micromamba 在新建虚拟环境的时候需要加上 env</span>
+</span></span><span style="display:flex;"><span>micromamba env create -n multiqc
+</span></span></code></pre></div><ul>
+<li>进入虚拟环境 <code>multiqc</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>micromamba activate multiqc
+</span></span></code></pre></div><ul>
+<li>安装 <code>MultiQC</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 注意！如果不添加 -c conda-forge, 则默认无法下载最新版本的 multiqc</span>
+</span></span><span style="display:flex;"><span>micromamba install -c bioconda -c conda-forge multiqc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 Y , 然后回车</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验是否安装成功</span>
+</span></span><span style="display:flex;"><span>multiqc --version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是: </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc, version 1.8</span>
+</span></span></code></pre></div><hr>
+<h2 id="使用教程">使用教程</h2>
+<h2 id="sra-toolkit"><code>SRA Toolkit</code></h2>
+<h3 id="下载-sra-文件">下载 <code>.sra</code> 文件</h3>
+<p>(假如我想下载 <code>SRR1646444</code>)</p>
+<h4 id="方法一-prefetch">方法一 (prefetch)</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># prefetch 自带断点续传</span>
+</span></span><span style="display:flex;"><span>prefetch SRR1646444
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 文件 SRR1646444.sra 保存在当前目录的 SRR1646444 文件夹里面</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 优点: prefetch 后面可以加上多个 SRR号, 利于下载多个 .sra 文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 缺点: 没有进度条, 不方便查看下载进度</span>
+</span></span></code></pre></div><h4 id="方法二-wget--srapath">方法二 (wget + srapath)</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># srapath 获取的是 .sra 文件对应的网址</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -c 参数使得 wget 支持断点续传</span>
+</span></span><span style="display:flex;"><span>wget -c <span style="color:#66d9ef">$(</span>srapath SRR1646444<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 文件 SRR1646444 保存在当前目录 (没有 .sra 后缀)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 优点:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1) wget 自带的进度条方便查看下载进度</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2) 可使用魔法加速, 这里不赘述</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 缺点: 下载多个 .sra 文件时需要多开或者额外操作</span>
+</span></span></code></pre></div><h4 id="方法三-prefetch--ascp-加速下载">方法三 (prefetch + ascp 加速下载)</h4>
+<ul>
+<li>如果你使用 <code>anaconda</code>:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 准备工作, 只需要初次使用时走一遍流程, 以后只要 &#39;开始下载&#39; 那步就可以了</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 首先, 确保所在虚拟环境为 sra-tools</span>
+</span></span><span style="display:flex;"><span>conda activate sra-tools
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 接着, 安装 aspera-connect</span>
+</span></span><span style="display:flex;"><span>conda install -c rpetit3 aspera-connect <span style="color:#75715e"># 等待一会儿后输入 y , 然后回车</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 搜寻你的私钥文件, 并添加到环境变量</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;ascp_key=</span><span style="color:#66d9ef">$(</span>find ~/anaconda3/envs/sra-tools/ -name asperaweb_id_dsa.openssh<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> &gt;&gt; ~/.bashrc;
+</span></span><span style="display:flex;"><span>source ~/.bashrc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检查是否成功找到私钥</span>
+</span></span><span style="display:flex;"><span>echo $ascp_key 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /home/saturn/anaconda3/envs/sra-tools/opt/aspera/connect/etc/asperaweb_id_dsa.openssh</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 没有输出的话说明有问题, 需要自行排查</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 开始下载</span>
+</span></span><span style="display:flex;"><span>prefetch -a <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>which ascp<span style="color:#66d9ef">)</span><span style="color:#e6db74">|</span>$ascp_key<span style="color:#e6db74">&#34;</span> SRR1646444
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 没问题的话会显示:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2024-10-14T13:14:20 prefetch.3.1.1: 1) Resolving &#39;SRR1646444&#39;...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2024-10-14T13:14:23 prefetch.3.1.1: Current preference is set to retrieve SRA Normalized Format files with full base quality scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2024-10-14T13:14:24 prefetch.3.1.1: 1) Downloading &#39;SRR1646444&#39;...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2024-10-14T13:14:24 prefetch.3.1.1:  SRA Normalized Format file is being retrieved</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2024-10-14T13:14:24 prefetch.3.1.1:  Downloading via HTTPS...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 文件 SRR1646444.sra 保存在当前目录的 SRR1646444 文件夹里面</span>
+</span></span></code></pre></div><ul>
+<li>如果你使用 <code>micromamba</code>:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 准备工作, 只需要初次使用时走一遍流程</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 首先, 确保所在虚拟环境为 sra-tools</span>
+</span></span><span style="display:flex;"><span>micromamba activate sra-tools
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 接着, 安装 aspera-connect</span>
+</span></span><span style="display:flex;"><span>micromamba install -c rpetit3 aspera-connect <span style="color:#75715e"># 等待一会儿后输入 Y , 然后回车</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 搜寻你的私钥文件, 并添加到环境变量</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;ascp_key=</span><span style="color:#66d9ef">$(</span>find ~/micromamba/envs/sra-tools/ -name asperaweb_id_dsa.openssh<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> &gt;&gt; ~/.bashrc;
+</span></span><span style="display:flex;"><span>source ~/.bashrc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检查是否成功找到私钥</span>
+</span></span><span style="display:flex;"><span>echo $ascp_key
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /home/saturn/micromamba/envs/sra-tools/opt/aspera/connect/etc/asperaweb_id_dsa.openssh</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 没有输出的话说明有问题, 需要自行排查</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 开始下载</span>
+</span></span><span style="display:flex;"><span>prefetch -a <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>which ascp<span style="color:#66d9ef">)</span><span style="color:#e6db74">|</span>$ascp_key<span style="color:#e6db74">&#34;</span> SRR1646444
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 没问题的话会显示:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2024-10-14T13:14:20 prefetch.3.1.1: 1) Resolving &#39;SRR1646444&#39;...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2024-10-14T13:14:23 prefetch.3.1.1: Current preference is set to retrieve SRA Normalized Format files with full base quality scores</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2024-10-14T13:14:24 prefetch.3.1.1: 1) Downloading &#39;SRR1646444&#39;...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2024-10-14T13:14:24 prefetch.3.1.1:  SRA Normalized Format file is being retrieved</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2024-10-14T13:14:24 prefetch.3.1.1:  Downloading via HTTPS...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 文件 SRR1646444.sra 保存在当前目录的 SRR1646444 文件夹里面</span>
+</span></span></code></pre></div><hr>
+<h3 id="转换-sra-文件为-fastqgz">转换 <code>.sra</code> 文件为 <code>fastq.gz</code></h3>
+<p>(假如我想把前面下载的 <code>SRR1646444.sra</code> 转换成 <code>SRR1646444.fastq.gz</code>)</p>
+<h4 id="使用-fastp-dump">使用 <code>fastp-dump</code></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fastq-dump --gzip --split-files SRR1646444.sra
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 会在当前目录生成 SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># fastq-dump 还支持通配符, 可转换多个 .sra 文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 例: fastq-dump --gzip --split-files *.sra</span>
+</span></span></code></pre></div><h4 id="使用-fasterp-dump">使用 <code>fasterp-dump</code></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 虽然 fasterp-dump 在处理速度上比 fastp-dump快, 但是并没有提供 --gzip 选项用于输出 gzip 压缩后的 fastq 文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 平替方法如下:</span>
+</span></span><span style="display:flex;"><span>fasterq-dump --split-files SRR1646444.sra -o /dev/stdout | gzip -c &gt; SRR1646444.fastq.gz
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原理: 先将 .sra 文件解压后输出到标准输出, 然后使用管道符导入到 gzip 实时压缩成 .fastq.gz 文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PS: 想要进一步提速, 可以使用 pigz 替换 gzip -c (注意: pigz 需安装! )</span>
+</span></span></code></pre></div><hr>
+<h4 id="附-默认参数下-fastp-dump-与-fasterp-dump-的处理速度对比">附: 默认参数下 <code>fastp-dump</code> 与 <code>fasterp-dump</code> 的处理速度对比</h4>
+<p>(我使用 shell 的是 <code>fish</code> , 而非 <code>bash</code> , 嘻嘻)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># fastp-dump (耗时约 443 秒)</span>
+</span></span><span style="display:flex;"><span>time fastq-dump --gzip --split-files SRR1646444
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Read 2631092 spots for SRR1646444</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Written 2631092 spots for SRR1646444</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ________________________________________________________</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Executed in  443.97 secs    fish           external</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    usr time   53.23 secs    0.00 micros   53.23 secs</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    sys time    1.34 secs  914.00 micros    1.33 secs</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># fasterp-dump (耗时约 30 秒)</span>
+</span></span><span style="display:flex;"><span>time fasterq-dump --split-files ./SRR1646444.sra -o /dev/stdout | gzip -c &gt; SRR1646444.fastq.gz.fasterp-dump
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># spots read      : 2,631,092</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># reads read      : 2,631,092</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># reads written   : 2,631,092</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ________________________________________________________</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Executed in   30.31 secs    fish           external</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    usr time   35.21 secs    0.78 millis   35.21 secs</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    sys time    3.68 secs    1.17 millis    3.68 secs</span>
+</span></span></code></pre></div><hr>
+<h3 id="查看-fastqgz-文件">查看 <code>.fastq.gz</code> 文件</h3>
+<h4 id="方法一-gunzip--less">方法一 (gunzip + less)</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gunzip -c SRR1646444.fastq.gz | less
+</span></span></code></pre></div><h4 id="方法二-zcat--less">方法二 (zcat + less)</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>zcat SRR1646444.fastq.gz | less
+</span></span></code></pre></div><h4 id="方法三-zless">方法三 (zless)</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>zless SRR1646444.fastq.gz
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># &#34;Less is more.&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="fastqc"><code>FastQC</code></h2>
+<h3 id="用法解析">用法解析</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fastqc <span style="color:#f92672">[</span>选项<span style="color:#f92672">]</span> &lt;fastq_file1&gt; &lt;fastq_file2&gt; ...
+</span></span></code></pre></div><h3 id="常用选项">常用选项</h3>
+<ul>
+<li><code>-o &lt;dir&gt;</code> : 指定输出文件路径, 默认为当前路径</li>
+<li><code>-t &lt;int&gt;</code> : 指定线程数目</li>
+<li><code>-q</code> : 安静模式，不显示日志信息</li>
+</ul>
+<h3 id="实战使用">实战使用</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fastqc SRR1646444.fastq.gz
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># application/gzip</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Started analysis of SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 5% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 10% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 15% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 20% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 25% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 30% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 35% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 40% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 45% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 50% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 55% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 60% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 65% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 70% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 75% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 80% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 85% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 90% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Approx 95% complete for SRR1646444.fastq.gz</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Analysis complete for SRR1646444.fastq.gz</span>
+</span></span></code></pre></div><h3 id="输出文件">输出文件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls *fastqc*
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># SRR1646444_fastqc.html    SRR1646444_fastqc.zip</span>
+</span></span></code></pre></div><ul>
+<li><code>.html 文件</code> ：包含可视化的质量报告，可在浏览器中查看</li>
+<li><code>.zip  文件</code> ：包含详细的统计数据及图表</li>
+</ul>
+<hr>
+<h2 id="multiqc"><code>MultiQC</code></h2>
+<h3 id="用法解析-1">用法解析</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>multiqc <span style="color:#f92672">[</span>选项<span style="color:#f92672">]</span> &lt;data_directory&gt;
+</span></span></code></pre></div><h3 id="常用选项-1">常用选项</h3>
+<ul>
+<li><code>-o &lt;dir&gt;</code> : 指定输出文件路径, 默认为当前路径</li>
+<li><code>-n &lt;name&gt;</code>：指定生成报告的文件名， 默认为 <code>multiqc_report.html</code></li>
+</ul>
+<h3 id="实战使用-1">实战使用</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>multiqc /public/workspace/shaojf/Course/NGS/DataSets/Lab1/rawdata.fastqc.result/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   /// MultiQC 🔍 | v1.17</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># |           multiqc | Search path : /public/workspace/shaojf/Course/NGS/DataSets/Lab1/rawdata.fastqc.result</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 36/36  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># |            fastqc | Found 18 reports</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># |           multiqc | Report      : multiqc_report.html</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># |           multiqc | Data        : multiqc_data</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># |           multiqc | MultiQC complete</span>
+</span></span></code></pre></div><h3 id="输出文件-1">输出文件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ls *multiqc*
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc_report.html</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc_data:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc.log</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc_citations.txt</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc_data.json</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc_fastqc.txt</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc_general_stats.txt</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc_software_versions.txt</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># multiqc_sources.txt</span>
+</span></span></code></pre></div><ul>
+<li><code>multiqc_report.html</code> : 主要的可视化报告，包含了多种交互式图表，可在浏览器中打开查看</li>
+<li><code>multiqc_data/ 文件夹</code> : 保存了所有用于生成报告的原始数据文件和一些辅助信息</li>
+</ul>
+<hr>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#数据库网站">数据库网站</a></li>
+    <li><a href="#数据下载工具">数据下载工具</a></li>
+    <li><a href="#质量评估工具">质量评估工具</a></li>
+    <li><a href="#安装-sra-toolkit">安装 <code>SRA Toolkit</code></a>
+      <ul>
+        <li><a href="#使用-anaconda-安装">使用 <code>anaconda</code> 安装</a></li>
+        <li><a href="#使用-micromamba-安装">使用 <code>micromamba</code> 安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#安装-fastqc">安装 <code>FastQC</code></a>
+      <ul>
+        <li><a href="#使用-anaconda-安装-1">使用 <code>anaconda</code> 安装</a></li>
+        <li><a href="#使用-micromamba-安装-1">使用 <code>micromamba</code> 安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#安装-multiqc">安装 <code>MultiQC</code></a>
+      <ul>
+        <li><a href="#使用-anaconda-安装-2">使用 <code>anaconda</code> 安装</a></li>
+        <li><a href="#使用-micromamba-安装-2">使用 <code>micromamba</code> 安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#使用教程">使用教程</a></li>
+    <li><a href="#sra-toolkit"><code>SRA Toolkit</code></a>
+      <ul>
+        <li><a href="#下载-sra-文件">下载 <code>.sra</code> 文件</a></li>
+        <li><a href="#转换-sra-文件为-fastqgz">转换 <code>.sra</code> 文件为 <code>fastq.gz</code></a></li>
+        <li><a href="#查看-fastqgz-文件">查看 <code>.fastq.gz</code> 文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#fastqc"><code>FastQC</code></a>
+      <ul>
+        <li><a href="#用法解析">用法解析</a></li>
+        <li><a href="#常用选项">常用选项</a></li>
+        <li><a href="#实战使用">实战使用</a></li>
+        <li><a href="#输出文件">输出文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#multiqc"><code>MultiQC</code></a>
+      <ul>
+        <li><a href="#用法解析-1">用法解析</a></li>
+        <li><a href="#常用选项-1">常用选项</a></li>
+        <li><a href="#实战使用-1">实战使用</a></li>
+        <li><a href="#输出文件-1">输出文件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="/ngs/ngs_lab0/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">NGS_lab0&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2024 Meteor03&#39;s Oxalis Garden
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

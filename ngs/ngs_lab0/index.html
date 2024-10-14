@@ -146,7 +146,8 @@
 <li>安装 <code>seqkit2</code></li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 注意！是seqkit，后面不用加2</span>
-</span></span><span style="display:flex;"><span>micromamba install -c bioconda seqkit
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注意！如果不添加 -c conda-forge, 则默认无法下载最新版本的 seqkit</span>
+</span></span><span style="display:flex;"><span>micromamba install -c bioconda -c conda-forge seqkit
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待进度条消失后，输入 Y ，然后回车</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验是否安装成功</span>
@@ -203,6 +204,12 @@
     </div>
     
 <nav id="article-nav">
+    
+    <a href="/ngs/ngs_lab1/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            NGS_lab1
+        </div>
+    </a>
     
     
     <a href="/linux/micromamba/" id="article-nav-older" class="article-nav-link-wrap">
