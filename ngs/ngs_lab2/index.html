@@ -146,7 +146,22 @@
 <li>安装 <code>cutadapt</code></li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 注意！如果不添加 -c conda-forge, 则默认无法下载最新版本的 cutadapt</span>
-</span></span><span style="display:flex;"><span>conda install -c bioconda -c conda-forge cutadapt
+</span></span><span style="display:flex;"><span>conda install -c bioconda -c conda-forge cutadadiff_gene <span style="color:#f92672">=</span> read.table<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;./result/PDAC-NET-ttest-fdr.txt&#34;</span>, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;\t&#34;</span>, header<span style="color:#f92672">=</span>TRUE, row.names<span style="color:#f92672">=</span>1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>diff_gene<span style="color:#f92672">=</span>as.matrix<span style="color:#f92672">(</span>diff_gene<span style="color:#f92672">)</span> <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>diff_order<span style="color:#f92672">=</span>diff_gene<span style="color:#f92672">[</span>order<span style="color:#f92672">(</span>diff_gene<span style="color:#f92672">[</span>,2<span style="color:#f92672">])</span>,<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>diff_order<span style="color:#f92672">=</span>diff_order<span style="color:#f92672">[</span>1:100,<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>hp_gene<span style="color:#f92672">=</span>gene_exp1<span style="color:#f92672">[</span>rownames<span style="color:#f92672">(</span>gene_exp1<span style="color:#f92672">)</span> %in% rownames<span style="color:#f92672">(</span>diff_order<span style="color:#f92672">)</span>,<span style="color:#f92672">]</span> 
+</span></span><span style="display:flex;"><span>hp_gene1<span style="color:#f92672">=</span>cbind<span style="color:#f92672">(</span>hp_gene<span style="color:#f92672">[</span>,1:6<span style="color:#f92672">]</span>,hp_gene<span style="color:#f92672">[</span>,7:12<span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>hmcols &lt;- colorRampPalette<span style="color:#f92672">(</span>c<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;green&#34;</span>,<span style="color:#e6db74">&#34;black&#34;</span>,<span style="color:#e6db74">&#34;red&#34;</span><span style="color:#f92672">))(</span>20<span style="color:#f92672">)</span> <span style="color:#75715e">#do not needs glots</span>
+</span></span><span style="display:flex;"><span>heatmap<span style="color:#f92672">(</span>hp_gene1, col<span style="color:#f92672">=</span>hmcols,cexRow<span style="color:#f92672">=</span>0.5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### library(&#34;gplots&#34;)</span>
+</span></span><span style="display:flex;"><span>heatmap.2<span style="color:#f92672">(</span>hp_gene1, col<span style="color:#f92672">=</span>hmcols,key<span style="color:#f92672">=</span>TRUE, symkey<span style="color:#f92672">=</span>FALSE, trace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>, cexRow<span style="color:#f92672">=</span>0.5<span style="color:#f92672">)</span><span style="color:#75715e">#scale, trace,density.info, cexRow, key,symkey</span>
+</span></span><span style="display:flex;"><span>heatmap.2<span style="color:#f92672">(</span>hp_gene1, col<span style="color:#f92672">=</span>hmcols,key<span style="color:#f92672">=</span>TRUE, symkey<span style="color:#f92672">=</span>FALSE, trace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>,density.info<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>, cexRow<span style="color:#f92672">=</span>0.5,cexCol<span style="color:#f92672">=</span>0.6,srtCol<span style="color:#f92672">=</span>45<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>heatmap.2<span style="color:#f92672">(</span>hp_gene1, col<span style="color:#f92672">=</span>redgreen<span style="color:#f92672">(</span>75<span style="color:#f92672">)</span>,key<span style="color:#f92672">=</span>TRUE, symkey<span style="color:#f92672">=</span>FALSE,  trace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>, cexRow<span style="color:#f92672">=</span>0.1,srtCol<span style="color:#f92672">=</span>45<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>heatmap.2<span style="color:#f92672">(</span>hp_gene1, col<span style="color:#f92672">=</span>redgreen<span style="color:#f92672">(</span>75<span style="color:#f92672">)</span>,key<span style="color:#f92672">=</span>TRUE, symkey<span style="color:#f92672">=</span>FALSE, scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;row&#34;</span>, trace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>, cexRow<span style="color:#f92672">=</span>0.1,srtCol<span style="color:#f92672">=</span>45<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>heatmap.2<span style="color:#f92672">(</span>hp_gene, col<span style="color:#f92672">=</span>hmcols,key<span style="color:#f92672">=</span>TRUE, symkey<span style="color:#f92672">=</span>FALSE, scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;row&#34;</span>, trace<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>, cexRow<span style="color:#f92672">=</span>0.1,density.info<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>,dendrogram<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span>,labRow<span style="color:#f92672">=</span>NA,ColSideColors<span style="color:#f92672">=</span>c<span style="color:#f92672">(</span>rep<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;red&#34;</span>,14<span style="color:#f92672">)</span>,rep<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;yellow&#34;</span>,5<span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>pt
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 等待一会儿后输入 y , 然后回车</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 检验是否安装成功</span>
@@ -225,7 +240,282 @@
 </span></span><span style="display:flex;"><span>fastp --version
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 我的输出是: </span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># fastp 0.23.4</span>
-</span></span></code></pre></div>
+</span></span></code></pre></div><h2 id="任务">任务</h2>
+<ul>
+<li>数据: <code>/public/workspace/shaojf/Course/NGS/DataSets/Lab2/Con_sequence_{1,2}.fastq.gz</code></li>
+</ul>
+<ol>
+<li>质量评估：<code>FastQC</code> 、<code>MultiQC</code></li>
+<li>质量控制：<code>fastqc</code> 后可发现原始数据adapter含量较高, 请用 <code>trimmomatic</code> 、<code>cutadapt</code> 或 <code>fastp</code>中的任意一个工具（或所有）完成切除 adapter 任务，并在完成后再次运行 <code>fastqc</code> 检查切除效率。（提示，可以用MultiQC将处理前后、不同工具预处理后的结果汇总在同一个报告中)</li>
+</ol>
+<h2 id="参考代码">参考代码</h2>
+<h2 id="0-准备工作">0. 准备工作</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 新建文件夹</span>
+</span></span><span style="display:flex;"><span>mkdir -p ~/myNGS/Lab2
+</span></span><span style="display:flex;"><span>cd ~/myNGS/Lab2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 原始数据软链接</span>
+</span></span><span style="display:flex;"><span>ln -s /public/workspace/shaojf/Course/NGS/DataSets/Lab2/Con_sequence_*.fastq.gz .
+</span></span></code></pre></div><h2 id="1-质量评估">1. 质量评估</h2>
+<ul>
+<li>寻找 adapter 类型</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 激活 fastqc 虚拟环境</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用 anaconda</span>
+</span></span><span style="display:flex;"><span>conda activate fastqc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用 micromamba</span>
+</span></span><span style="display:flex;"><span>micromamba activate fastqc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 新建文件夹 raw_fastqc, 用于保存原始数据的质检结果</span>
+</span></span><span style="display:flex;"><span>mkdir raw_fastqc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastQC 质检 (自动根据 *.fastq.gz 个数来调整线程数)</span>
+</span></span><span style="display:flex;"><span>fastqc --threads <span style="color:#66d9ef">$(</span>ls *.fastq.gz | wc -w<span style="color:#66d9ef">)</span> *.fastq.gz -o ./raw_fastqc
+</span></span></code></pre></div><p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/raw_fastqc/Con_sequence_1_fastqc.html#M10"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 Con_sequence_1_fastqc.html
+</a></p>
+</blockquote>
+<p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/raw_fastqc/Con_sequence_2_fastqc.html#M10"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 Con_sequence_2_fastqc.html
+</a></p>
+</blockquote>
+<ul>
+<li>
+<p>从以上两个示例文件中，我们可以发现需要切的 adapter 有三种，为 <code>Nextera Transposase Sequence</code>、<code>PolyG</code>、<code>PolyA</code></p>
+</li>
+<li>
+<p>查看 adapter 具体序列</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># adapter 序列来源: fastqc 的配置文件 </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (具体路径根据你 fastqc 所在的虚拟环境而定, 这里使用 Lab1 中所安装的路径)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用的是 anaconda</span>
+</span></span><span style="display:flex;"><span>cat <span style="color:#66d9ef">$(</span>find ~/anaconda3/envs/fastqc/ -name <span style="color:#e6db74">&#34;adapter_list.txt&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用的是 micromamba</span>
+</span></span><span style="display:flex;"><span>cat <span style="color:#66d9ef">$(</span>find ~/micromamba/envs/fastqc/ -name <span style="color:#e6db74">&#34;adapter_list.txt&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 最后几行即为 fastqc 可检测到的 adapter：</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Illumina Universal Adapter                  AGATCGGAAGAG</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Illumina Small RNA 3&#39;                       TGGAATTCTCGG</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Illumina Small RNA 5&#39; Adapter               GATCGTCGGACT</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Nextera Transposase Sequence                CTGTCTCTTATA</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PolyA                                       AAAAAAAAAAAA</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># PolyG                                       GGGGGGGGGGGG</span>
+</span></span></code></pre></div><ul>
+<li>我们可以建立 adapter 序列文件 <code>adapter_Nextera_Transposase_Sequence_Poly_G_A.fa</code>，方便后续的 adapter 剪切工作</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>echo -e <span style="color:#e6db74">&#34;&gt;Nextera_Transposase_Sequence\nCTGTCTCTTATA\n&gt;Poly_G\nGGGGGGGGGGGG\n&gt;Poly_A\nAAAAAAAAAAAA&#34;</span> &gt; adapter_Nextera_Transposase_Sequence_Poly_G_A.fa
+</span></span></code></pre></div><h2 id="2-质量控制">2. 质量控制</h2>
+<h3 id="使用-fastp-切除-adapter">使用 fastp 切除 adapter</h3>
+<ul>
+<li>先尝尝甜头, <code>fastp</code>, 启动!</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 激活 fastp 虚拟环境</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用 anaconda</span>
+</span></span><span style="display:flex;"><span>conda activate fastp
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用 micromamba</span>
+</span></span><span style="display:flex;"><span>micromamba activate fastp
+</span></span></code></pre></div><ul>
+<li>新建文件夹 <code>fastp</code> 用于保存 <code>fastp</code> 的输出结果</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir fastp
+</span></span><span style="display:flex;"><span>cd fastp
+</span></span></code></pre></div><ul>
+<li>要开始切咯～</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># fastp 效率最高, 16线程下仅需20秒左右</span>
+</span></span><span style="display:flex;"><span>fastp -i ../Con_sequence_1.fastq.gz -I ../Con_sequence_2.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      -o fastp_Con_sequence_1.fastq.gz -O fastp_Con_sequence_2.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      --detect_adapter_for_pe <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      -5 -c <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      --cut_mean_quality <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      --length_required <span style="color:#ae81ff">36</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      --adapter_fasta ../adapter_Nextera_Transposase_Sequence_Poly_G_A.fa <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      -j fastp_Con_sequence.json <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      -h fastp_Con_sequence.html <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>      -w <span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 参数解析:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -5 (--cut_front) 需要指定滑动窗口方向 (5&#39;-&gt;3&#39;), 否则会跳过切除低质量碱基</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -c (--correctionenable) 加上 -c 才会进行碱基校正 (仅适用于双末端数据, 默认不启用)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># -w 线程数 (别贪心哦！目前 fastp 最多就支持16线程)</span>
+</span></span></code></pre></div><ul>
+<li><code>FastQC</code> 再来质检一下</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 需切换自己虚拟环境下的 fastqc，可点击网页右侧 &#34;1.质量评估&#34; 查看，不再赘述</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastQC 质检 (自动根据 *.fastq.gz 个数来调整线程数)</span>
+</span></span><span style="display:flex;"><span>fastqc --threads <span style="color:#66d9ef">$(</span>ls *.fastq.gz | wc -w<span style="color:#66d9ef">)</span> *.fastq.gz
+</span></span></code></pre></div><p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/fastp/fastp_Con_sequence_1_fastqc.html#M10"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 fastp_Con_sequence_1_fastqc.html
+</a></p>
+</blockquote>
+<p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/fastp/fastp_Con_sequence_2_fastqc.html#M10"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 fastp_Con_sequence_2_fastqc.html
+</a></p>
+</blockquote>
+<ul>
+<li>可以发现 adapter 们全都是一条直线啦！</li>
+</ul>
+<hr>
+<h3 id="使用-cutadapt-切除-adapter">使用 <code>cutadapt</code> 切除 adapter</h3>
+<ul>
+<li>激活 <code>cutadapt</code> 虚拟环境</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用 anaconda</span>
+</span></span><span style="display:flex;"><span>conda activate cutadapt
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用 micromamba</span>
+</span></span><span style="display:flex;"><span>micromamba activate cutadapt
+</span></span></code></pre></div><ul>
+<li>新建文件夹 <code>cutadapt</code> 用于保存 <code>cutadapt</code> 的输出结果</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 先回到 Lab2</span>
+</span></span><span style="display:flex;"><span>cd ~/myNGS/Lab2
+</span></span><span style="display:flex;"><span>mkdir cutadapt
+</span></span><span style="display:flex;"><span>cd cutadapt
+</span></span></code></pre></div><ul>
+<li>开切！(个人最喜欢 <code>cutadapt</code>，因为它的进度条是一把小剪刀！)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># cutadapt 比 fastp 慢点, 20线程下需70秒左右</span>
+</span></span><span style="display:flex;"><span>cutadapt --quality-base<span style="color:#f92672">=</span><span style="color:#ae81ff">33</span> -q <span style="color:#ae81ff">20</span> -m <span style="color:#ae81ff">36</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>         -a file:../adapter_Nextera_Transposase_Sequence_Poly_G_A.fa <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>         -A file:../adapter_Nextera_Transposase_Sequence_Poly_G_A.fa <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>         -o cutadapt_Con_sequence_1.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>         -p cutadapt_Con_sequence_2.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>         --cores <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>         ../Con_sequence_1.fastq.gz ../Con_sequence_2.fastq.gz
+</span></span></code></pre></div><ul>
+<li><code>FastQC</code> 再来质检一下</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 需切换自己虚拟环境下的 fastqc，可点击网页右侧 &#34;1.质量评估&#34; 查看，不再赘述</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastQC 质检 (自动根据 *.fastq.gz 个数来调整线程数)</span>
+</span></span><span style="display:flex;"><span>fastqc --threads <span style="color:#66d9ef">$(</span>ls *.fastq.gz | wc -w<span style="color:#66d9ef">)</span> *.fastq.gz
+</span></span></code></pre></div><p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/cutadapt/cutadapt_Con_sequence_1_fastqc.html#M10"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 cutadapt_Con_sequence_1_fastqc.html
+</a></p>
+</blockquote>
+<p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/cutadapt/cutadapt_Con_sequence_2_fastqc.html#M10"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 cutadapt_Con_sequence_2_fastqc.html
+</a></p>
+</blockquote>
+<ul>
+<li>可以发现 adapter 们又全都是一条直线啦！</li>
+</ul>
+<hr>
+<h3 id="使用-trimmomatic-切除-adapter">使用 <code>trimmomatic</code> 切除 adapter</h3>
+<p>(最苦不过 trimmomatic)</p>
+<ul>
+<li>激活 <code>trimmomatic</code> 虚拟环境</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用 anaconda</span>
+</span></span><span style="display:flex;"><span>conda activate trimmomatic
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用 micromamba</span>
+</span></span><span style="display:flex;"><span>micromamba activate trimmomatic
+</span></span></code></pre></div><ul>
+<li>新建文件夹 <code>trimmomatic</code> 用于保存 <code>trimmomatic</code> 的输出结果</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 先回到 Lab2</span>
+</span></span><span style="display:flex;"><span>cd ~/myNGS/Lab2
+</span></span><span style="display:flex;"><span>mkdir trimmomatic
+</span></span><span style="display:flex;"><span>cd trimmomatic
+</span></span></code></pre></div><ul>
+<li>切！切！切！</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># trimmomatic 慢的嘞... 20线程下耗时将近两分半 (一坤钟 (bushi))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 而且还不稳定, 同样的命令有的时候跑一次还不一定成功... 可多尝试几次</span>
+</span></span><span style="display:flex;"><span>trimmomatic PE -phred33 ../Con_sequence_1.fastq.gz ../Con_sequence_2.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            trimmomatic_Con_sequence_1_paired.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            trimmomatic_Con_sequence_1_unpaired.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            trimmomatic_Con_sequence_2_paired.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            trimmomatic_Con_sequence_2_unpaired.fastq.gz <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            ILLUMINACLIP:../adapter_Nextera_Transposase_Sequence_Poly_G_A.fa:0:15:5 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            -threads <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 参数解析:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 未完待续...</span>
+</span></span></code></pre></div><ul>
+<li>麻烦 <code>FastQC</code> 再来质检一下</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 需切换自己虚拟环境下的 fastqc，可点击网页右侧 &#34;1.质量评估&#34; 查看，不再赘述</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># FastQC 质检 (自动根据 *.fastq.gz 个数来调整线程数)</span>
+</span></span><span style="display:flex;"><span>fastqc --threads <span style="color:#66d9ef">$(</span>ls *.fastq.gz | wc -w<span style="color:#66d9ef">)</span> *.fastq.gz
+</span></span></code></pre></div><p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/trimmomatic/trimmomatic_Con_sequence_1_paired_fastqc.html#M10"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 trimmomatic_Con_sequence_1_paired_fastqc.html
+</a></p>
+</blockquote>
+<p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/trimmomatic/trimmomatic_Con_sequence_2_paired_fastqc.html#M10"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 trimmomatic_Con_sequence_2_paired_fastqc.html
+</a></p>
+</blockquote>
+<p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/trimmomatic/trimmomatic_Con_sequence_1_unpaired_fastqc.html#M10"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 trimmomatic_Con_sequence_1_unpaired_fastqc.html
+</a></p>
+</blockquote>
+<p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/trimmomatic/trimmomatic_Con_sequence_2_unpaired_fastqc.html#M10"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 trimmomatic_Con_sequence_2_unpaired_fastqc.html
+</a></p>
+</blockquote>
+<ul>
+<li>可以发现 adapter 们又双叒叕全都是一条直线啦！</li>
+</ul>
+<h2 id="3-汇总报告">3. 汇总报告</h2>
+<ul>
+<li>使用 <code>MultiQC</code> 汇总 <code>FastQC</code> 报告</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 先回到 Lab2</span>
+</span></span><span style="display:flex;"><span>cd ~/myNGS/Lab2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 激活 multiqc 虚拟环境</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用 anaconda</span>
+</span></span><span style="display:flex;"><span>conda activate multiqc
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假如你使用 micromamba</span>
+</span></span><span style="display:flex;"><span>micromamba activate multiqc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 一键汇总剪切过 adapter 的报告</span>
+</span></span><span style="display:flex;"><span>multiqc ./fastp/ ./cutadapt/ ./trimmomatic/
+</span></span></code></pre></div><p><a href="https://r2-hugo.meteor-oxalis3.com/02_NGS/Lab2/multiqc_report.html#fastqc_adapter_content"
+target="_blank"
+rel="noopener noreferrer"></p>
+<blockquote>
+<p>📄 multiqc_report.html
+</a></p>
+</blockquote>
+<ul>
+<li>可以观察到，三种软件的 adapter 剪切结果大差不差</li>
+</ul>
+
         </div>
 
         
@@ -253,6 +543,18 @@
         <li><a href="#使用-micromamba-安装-2">使用 <code>micromamba</code> 安装</a></li>
       </ul>
     </li>
+    <li><a href="#任务">任务</a></li>
+    <li><a href="#参考代码">参考代码</a></li>
+    <li><a href="#0-准备工作">0. 准备工作</a></li>
+    <li><a href="#1-质量评估">1. 质量评估</a></li>
+    <li><a href="#2-质量控制">2. 质量控制</a>
+      <ul>
+        <li><a href="#使用-fastp-切除-adapter">使用 fastp 切除 adapter</a></li>
+        <li><a href="#使用-cutadapt-切除-adapter">使用 <code>cutadapt</code> 切除 adapter</a></li>
+        <li><a href="#使用-trimmomatic-切除-adapter">使用 <code>trimmomatic</code> 切除 adapter</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-汇总报告">3. 汇总报告</a></li>
   </ul>
 </nav>
         </div>
