@@ -8,6 +8,17 @@
     <language>zh-CN</language>
     <lastBuildDate>Sat, 12 Oct 2024 09:50:11 +0800</lastBuildDate><atom:link href="https://meteor-oxalis3.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>迁移通知</title>
+      <link>https://meteor-oxalis3.github.io/vuepress/</link>
+      <pubDate>Sat, 09 Nov 2024 10:09:00 +0800</pubDate>
+      
+      <guid>https://meteor-oxalis3.github.io/vuepress/</guid>
+      <description>本网站今后应该不太会更新了，因为我迁移到更加华丽的 VuePress 框架啦，哈哈哈哈哈哈
+传送门：
+Meteor03&amp;rsquo;s Oxalis Garden</description>
+    </item>
+    
+    <item>
       <title>NGS_lab2</title>
       <link>https://meteor-oxalis3.github.io/ngs/ngs_lab2/</link>
       <pubDate>Sat, 12 Oct 2024 09:50:11 +0800</pubDate>
